@@ -43,7 +43,7 @@
         justify-content: start;
         align-items: center;
         gap: 20px;
-        transition: all .5s ease;
+        transition: all 1s ease;
         cursor: default;
 
         &:not(.active) {
@@ -187,7 +187,7 @@
         .menu {
             position: absolute;
             width:  clamp(40px, 10%, 100px);
-            bottom: 20px;
+            bottom: 100px;
             right: 5px;
 
             cursor: pointer;
