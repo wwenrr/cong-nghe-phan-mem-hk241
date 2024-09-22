@@ -15,7 +15,7 @@ const menu = [
     {
         logo: "https://cdn-icons-png.flaticon.com/128/3525/3525026.png",
         describe: "Bảng Điều Khiển",
-        url: "/fef"
+        url: "/#"
     },
     {
         logo: "https://cdn-icons-png.flaticon.com/128/9195/9195785.png",
