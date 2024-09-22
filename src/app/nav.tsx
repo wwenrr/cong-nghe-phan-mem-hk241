@@ -13,40 +13,40 @@ const menu = [
         url: "/"
     },
     {
-        logo: "https://cdn-icons-png.flaticon.com/128/3525/3525026.png",
-        describe: "Bảng Điều Khiển",
-        url: "/#"
-    },
-    {
         logo: "https://cdn-icons-png.flaticon.com/128/9195/9195785.png",
         describe: "Thông Tin",
         url: "/info"
     },
-    {
-        logo: "https://cdn-icons-png.flaticon.com/128/3233/3233468.png",
-        describe: "Máy In",
-        url: "#"
-    },
-    {
-        logo: "https://cdn-icons-png.flaticon.com/128/1177/1177568.png",
-        describe: "Người Dùng",
-        url: "#"
-    },
-    {
-        logo: "https://cdn-icons-png.flaticon.com/128/535/535137.png",
-        describe: "Vị Trí",
-        url: "#"
-    },
-    {
-        logo: "https://cdn-icons-png.flaticon.com/128/9746/9746243.png",
-        describe: "Tài Liệu",
-        url: "#"
-    },
-    {
-        logo: "https://cdn-icons-png.flaticon.com/128/1946/1946436.png",
-        describe: "Trang Chủ",
-        url: "#"
-    }
+    // {
+    //     logo: "https://cdn-icons-png.flaticon.com/128/3525/3525026.png",
+    //     describe: "Bảng Điều Khiển",
+    //     url: "/#"
+    // },
+    // {
+    //     logo: "https://cdn-icons-png.flaticon.com/128/3233/3233468.png",
+    //     describe: "Máy In",
+    //     url: "#"
+    // },
+    // {
+    //     logo: "https://cdn-icons-png.flaticon.com/128/1177/1177568.png",
+    //     describe: "Người Dùng",
+    //     url: "#"
+    // },
+    // {
+    //     logo: "https://cdn-icons-png.flaticon.com/128/535/535137.png",
+    //     describe: "Vị Trí",
+    //     url: "#"
+    // },
+    // {
+    //     logo: "https://cdn-icons-png.flaticon.com/128/9746/9746243.png",
+    //     describe: "Tài Liệu",
+    //     url: "#"
+    // },
+    // {
+    //     logo: "https://cdn-icons-png.flaticon.com/128/1946/1946436.png",
+    //     describe: "Trang Chủ",
+    //     url: "#"
+    // }
 ]
 
 export default function Nav() {
