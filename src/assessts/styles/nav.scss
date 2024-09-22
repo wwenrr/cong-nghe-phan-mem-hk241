@@ -1,0 +1,114 @@
+.logo_detail {
+    width: 100%;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    img {
+        height: 75px;
+        width: 75px;
+        // margin: auto;
+        background-color: #ecf0f6;
+    }
+
+    span {
+        white-space: nowrap;
+        font-weight: bold;
+        font-size: 20px;
+        color: #033f6c;
+    }
+}
+
+.cta {
+    padding-top: 50px;
+    box-sizing: border-box;
+    width: 100%;
+    height: calc(100% - 75px);
+    border-top: 2px solid #033f6c;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
+    gap: 15px;
+    padding-left: 35px;
+    padding-right: 50px;
+
+    .item {
+        position: relative;
+        height: 30px;
+        width: 100%;
+        // background-color: aqua;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        gap: 20px;
+        cursor: pointer;
+
+        .logo {
+            width: 25px;
+            height: 25px;
+            object-fit: cover;
+
+            img {
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        span {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        &::after {
+            position: absolute;
+            content: "";
+            height: 100%;
+            width: 100%;
+            background-color: #F5F5F5;
+            opacity: 0.5;
+            padding: 5px;
+            padding-right: 15px;
+            border-radius: 20px;
+            left: -15px;
+            opacity: 0.3;
+            box-shadow: 2px 2px 4px black;
+        }
+
+        &::before {
+            position: absolute;
+            content: "";
+            height: 100%;
+            width: 0px;
+            background-color: #3C3D37;
+            opacity: 0.5;
+            padding: 5px;
+            padding-right: 15px;
+            border-radius: 20px;
+            left: -15px;
+            visibility: hidden;
+            transition: all .2s ease
+        }
+
+        &:hover::before {
+            visibility: visible;
+            width: 100%;
+        }
+
+        @keyframes animate {
+            0% {
+                visibility: hidden;
+            }
+            30% {
+                visibility: visible;
+            }
+            31% {
+                width: 0px;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+    }
+}
