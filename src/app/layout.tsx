@@ -3,6 +3,7 @@ import {Roboto } from '@next/font/google'
 import '@styles/layout.scss'
 import Nav from "./nav";
 import '@styles/reset.css'
+import Home from "./page";
 
 export const metadata: Metadata = {
   title: "HCMUT-SSPS",
