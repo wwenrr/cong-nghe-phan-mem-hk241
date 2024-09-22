@@ -71,7 +71,10 @@ export default function Nav() {
 
     const handleClose = () => {
         const navElement = document.querySelector('.nav');
-        if(navElement && navElement.classList.contains('expand') && window.innerWidth < 550) navElement.classList.toggle('expand');
+        if(navElement && navElement.classList.contains('expand') && window.innerWidth < 550) {
+            console.log("nhỏ hơn 550px")
+            navElement.classList.toggle('expand');
+        }
     }
 
     return(
@@ -85,15 +88,24 @@ export default function Nav() {
             </div>
 
             <div className="cta">
-                {menu.map((item, index) => {
-                    return (
-                        <Link href={item.url} key={index} className={`item ${isInclude(item.url) ? 'active' : ''}`} onClick={handleClose} title={item.describe}>
-                            <div className="logo" >
+            {menu.map((item, index) => {
+                return (
+                    isInclude(item.url) ? (
+                        <div key={index} className="item active" title={item.describe}>
+                            <div className="logo">  
+                                <img src={item.logo} alt="logo" />
+                            </div>
+                            <span>{item.describe}</span>
+                        </div>
+                    ) : (
+                        <Link href={item.url} key={index} className="item" onClick={handleClose} title={item.describe}>
+                            <div className="logo">
                                 <img src={item.logo} alt="logo" />
                             </div>
                             <span>{item.describe}</span>
                         </Link>
-                    );
+                    )
+                );
                 })}
             </div>
         </>
