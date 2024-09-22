@@ -14,7 +14,7 @@ const menu = [
         describe: "Bảng Điều Khiển"
     },
     {
-        logo: "https://www.flaticon.com/free-icon/information-button_1176",
+        logo: "https://cdn-icons-png.flaticon.com/128/1/1176.png",
         describe: "Thông Tin"
     },
     {
