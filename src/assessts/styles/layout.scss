@@ -1,22 +1,46 @@
 .page_layout {
     display: flex;
     height: 100vh;
-    min-width: 400px;
+    overflow-x: auto;
 
     .nav {
+        position: relative;
+        box-shadow: 3px 4px 15px black;
+        overflow: hidden;
         padding-top: 10px;
-        width: 250px;
+        width: 75px;
         height: 100%;
-        border-right: 5px solid #033f6c;
+        // border-right: 1px solid #033f6c;
+        transition: all .25s ease;
+
+        // &:hover {
+        //     width: 250px;
+        // }
     }
 
     main {
-        background-color: rebeccapurple;
-        width: calc(100% - 250px);
+        flex: 1;
         height: 100%;
+        overflow-x: auto;
     }
 }
 
-@media (max-width: 600px) {
-    
+@media (min-width: 500px) {
+    .nav {
+        &:hover {
+            width: 250px;
+        }
+    }
+}
+
+.nav.expand {
+    width: 100%;
+}
+
+.nav.expand > .logo_detail > .menu {
+    right: 45%;
+}
+
+.nav.expand >  .cta {
+    align-items: center;
 }

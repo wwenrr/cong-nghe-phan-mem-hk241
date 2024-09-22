@@ -1,15 +1,15 @@
 .logo_detail {
+    // padding-left: 20px;
     width: 100%;
     height: 75px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
 
     img {
-        height: 75px;
-        width: 75px;
-        // margin: auto;
-        background-color: #ecf0f6;
+        
+        background-color: transparent;
+        transition: all .5s ease;        
     }
 
     span {
@@ -25,7 +25,7 @@
     box-sizing: border-box;
     width: 100%;
     height: calc(100% - 75px);
-    border-top: 5px double #033f6c;
+    // border-top: 15px double #033f6c;
     display: flex;
     flex-direction: column;
     // justify-content: center;
@@ -37,8 +37,7 @@
     .item {
         position: relative;
         height: 30px;
-        width: 100%;
-        // background-color: aqua;
+        width: 170px;
         display: flex;
         justify-content: start;
         align-items: center;
@@ -66,13 +65,13 @@
             content: "";
             height: 100%;
             width: 100%;
-            background-color: #F5F5F5;
+            background-color: gainsboro;
             opacity: 0.5;
             padding: 5px;
             padding-right: 15px;
-            border-radius: 20px;
+            border-radius: 15px;
             left: -15px;
-            opacity: 0.1;
+            opacity: 0.15;
             box-shadow: 3px 4px 4px black;
         }
 
@@ -81,27 +80,14 @@
             content: "";
             height: 100%;
             width: 0px;
-            background-color: #3C3D37;
+            background-color: #F5F5F5;
             opacity: 0.5;
             padding: 5px;
             padding-right: 15px;
             border-radius: 20px;
             left: -15px;
             visibility: hidden;
-            transition: all .1s ease
-        }
-
-        &:hover::before {
-            visibility: visible;
-            width: 100%;
-        }
-
-        &:hover {
-            transform: scale(0.95);
-        }
-
-        &:active {
-            transform: scale(1);
+            transition: all .3s ease
         }
 
         @keyframes animate {
@@ -120,3 +106,82 @@
         }
     }
 }
+
+//pc
+@media (min-width: 500px) {
+    .cta {
+        .item {
+            &:hover::before {
+                visibility: visible;
+                width: 100%;
+            }
+
+            &:hover {
+                transform: scale(0.9);
+            }
+    
+            &:active {
+                transform: scale(1);
+            }
+        }
+    }
+
+    .logo_detail {
+        justify-content: flex-start;
+
+        .menu {
+            display: none;
+        }
+
+        .logo {
+            // padding-left: px;
+            width: 75px;
+            height: 75px;
+        }
+    }
+}
+
+
+//laplet
+@media (max-width: 500px) {
+    .cta {
+        .item {
+            &:active {
+                transform: scale(1.1);
+            }
+        }
+    }
+
+    .logo_detail{
+        span {
+            display: none;
+        }
+
+        .logo {
+            height: 75px;
+            width: 75px;
+            padding-left: 5px;
+        }
+
+        .menu {
+            position: absolute;
+            width:  clamp(40px, 10%, 100px);
+            bottom: 20px;
+            right: 5px;
+
+            cursor: pointer;
+
+            &:hover {
+                transform: scale(0.9);
+            }
+
+            &:active {
+                transform: scale(1);
+            }
+        }
+
+        justify-content: center;
+        padding-right: 10px;
+    }
+}
+
