@@ -1,50 +1,77 @@
 'use client'
 
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
-import logo from "@/assessts/img/logo.png"
 import "@styles/nav.scss"
-import { describe } from "node:test";
+import Link from "next/link";
+import { usePathname } from 'next/navigation'
 
 const menu = [
     {
         logo: "https://cdn-icons-png.flaticon.com/128/1946/1946436.png",
-        describe: "Trang Chủ"
+        describe: "Trang Chủ",
+        url: "/"
     },
     {
         logo: "https://cdn-icons-png.flaticon.com/128/3525/3525026.png",
-        describe: "Bảng Điều Khiển"
+        describe: "Bảng Điều Khiển",
+        url: "/fef"
     },
     {
         logo: "https://cdn-icons-png.flaticon.com/128/9195/9195785.png",
-        describe: "Thông Tin"
+        describe: "Thông Tin",
+        url: "/info"
     },
     {
         logo: "https://cdn-icons-png.flaticon.com/128/3233/3233468.png",
-        describe: "Máy In"
+        describe: "Máy In",
+        url: "#"
     },
     {
         logo: "https://cdn-icons-png.flaticon.com/128/1177/1177568.png",
-        describe: "Người Dùng"
+        describe: "Người Dùng",
+        url: "#"
     },
     {
         logo: "https://cdn-icons-png.flaticon.com/128/535/535137.png",
-        describe: "Vị Trí"
+        describe: "Vị Trí",
+        url: "#"
     },
     {
         logo: "https://cdn-icons-png.flaticon.com/128/9746/9746243.png",
-        describe: "Tài Liệu"
+        describe: "Tài Liệu",
+        url: "#"
     },
     {
         logo: "https://cdn-icons-png.flaticon.com/128/1946/1946436.png",
-        describe: "Trang Chủ"
+        describe: "Trang Chủ",
+        url: "#"
     }
 ]
 
 export default function Nav() {
+    const path = usePathname()
+
+    const isInclude = (e: string):boolean => {
+    
+        if(e == '/' && path=='/') return true;
+        else if(e == '/')         return false
+        
+        return path.includes(e);
+    }
+
+    useEffect(() => {
+        console.log(path)
+    }, [])
+
     const handleClick = () => {
-        const navElement = document.querySelector('.nav'); // Tìm phần tử có class .nav
-        if(navElement) navElement.classList.toggle('expand');
+        const navElement = document.querySelector('.nav');
+        if(navElement && window.innerWidth < 550) navElement.classList.toggle('expand');
+    }
+
+    const handleClose = () => {
+        const navElement = document.querySelector('.nav');
+        if(navElement && navElement.classList.contains('expand') && window.innerWidth < 550) navElement.classList.toggle('expand');
     }
 
     return(
@@ -60,12 +87,12 @@ export default function Nav() {
             <div className="cta">
                 {menu.map((item, index) => {
                     return (
-                        <div key={index} className="item">
-                            <div className="logo">
+                        <Link href={item.url} key={index} className={`item ${isInclude(item.url) ? 'active' : ''}`} onClick={handleClose} title={item.describe}>
+                            <div className="logo" >
                                 <img src={item.logo} alt="logo" />
                             </div>
                             <span>{item.describe}</span>
-                        </div>
+                        </Link>
                     );
                 })}
             </div>

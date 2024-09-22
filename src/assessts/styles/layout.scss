@@ -22,10 +22,38 @@
         flex: 1;
         height: 100%;
         overflow-x: auto;
+        display: flex;
+        flex-direction: column;
+
+        header {
+            height: 110px;
+            background-color: red;
+        }
+
+        section {
+            height: 450px;
+            background-color: antiquewhite;
+        }
+
+        footer {
+            padding-left: 20px;
+            height: auto;
+            flex: 1;
+
+            .img_warp {
+                height: 50px;
+                width: 50px;
+                object-fit: contain;
+
+                img {
+                    height: 100%;
+                }
+            }
+        }
     }
 }
 
-@media (min-width: 500px) {
+@media (min-width: 550px) {
     .nav {
         &:hover {
             width: 250px;
