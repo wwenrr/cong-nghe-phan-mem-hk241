@@ -1,10 +1,11 @@
 'use client'
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import "@styles/nav.scss"
 import Link from "next/link";
 import { usePathname } from 'next/navigation'
+import useSound from "use-sound";
 
 const menu = [
     {
@@ -53,6 +54,7 @@ const menu = [
 
 export default function Nav() {
     const path = usePathname()
+    const [play] = useSound('/sounds/click.mp3')
 
     const isInclude = (e: string):boolean => {
     
@@ -63,15 +65,19 @@ export default function Nav() {
     }
 
     useEffect(() => {
-        console.log(path)
+
     }, [])
 
     const handleClick = () => {
+        
+
         const navElement = document.querySelector('.nav');
         if(navElement && window.innerWidth < 550) navElement.classList.toggle('expand');
     }
 
     const handleClose = () => {
+        play()
+
         const navElement = document.querySelector('.nav');
         if(navElement && navElement.classList.contains('expand') && window.innerWidth < 550) {
             console.log("nhỏ hơn 550px")
