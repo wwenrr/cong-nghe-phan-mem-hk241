@@ -10,8 +10,8 @@ const menu = [
         describe: "Trang Chủ"
     },
     {
-        logo: "https://cdn-icons-png.flaticon.com/128/1946/1946436.png",
-        describe: "Trang Chủ"
+        logo: "https://cdn-icons-png.flaticon.com/128/1828/1828791.png",
+        describe: "Bảng Điều Khiển"
     },
     {
         logo: "https://cdn-icons-png.flaticon.com/128/1946/1946436.png",
