@@ -113,6 +113,9 @@ body {
   line-height: 1;
   overflow-x: hidden;
   min-width: 300px;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  height: 100dvh;
 }
 ol,
 ul {

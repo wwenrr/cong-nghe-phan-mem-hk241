@@ -43,21 +43,21 @@ export default function RootLayout({
               <section>
                 {children}
               </section>
-
-              <footer>
-                <div className="warp">
-                  <div className="img_warp">
-                    <img src="https://hcmut.edu.vn/img/nhanDienThuongHieu/01_logobachkhoasang.png" alt="" />
-                  </div>
-
-                  <span>Trường Đại học Bách Khoa - Tp.HCM</span>
-                </div>
-
-                <div className="icon_warp">
-                  <Warper />
-                </div>
-              </footer>
             </main>
+          </div>
+
+          <div className="footer">
+            <div className="warp">
+              <div className="img_warp">
+                <img src="https://hcmut.edu.vn/img/nhanDienThuongHieu/01_logobachkhoasang.png" alt="" />
+              </div>
+
+              <span>Trường Đại học Bách Khoa - Tp.HCM</span>
+            </div>
+
+            <div className="icon_warp">
+              <Warper />
+            </div>
           </div>
       </body>
     </html>
