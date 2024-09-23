@@ -4,6 +4,7 @@ import '@styles/layout.scss'
 import Nav from "./nav";
 import '@styles/reset.css'
 import Home from "./page";
+import Warper from "./icon-warp";
 
 export const metadata: Metadata = {
   title: "HCMUT-SSPS",
@@ -44,8 +45,16 @@ export default function RootLayout({
               </section>
 
               <footer>
-                <div className="img_warp">
-                  <img src="https://hcmut.edu.vn/img/nhanDienThuongHieu/01_logobachkhoasang.png" alt="" />
+                <div className="warp">
+                  <div className="img_warp">
+                    <img src="https://hcmut.edu.vn/img/nhanDienThuongHieu/01_logobachkhoasang.png" alt="" />
+                  </div>
+
+                  <span>Trường Đại học Bách Khoa - Tp.HCM</span>
+                </div>
+
+                <div className="icon_warp">
+                  <Warper />
                 </div>
               </footer>
             </main>

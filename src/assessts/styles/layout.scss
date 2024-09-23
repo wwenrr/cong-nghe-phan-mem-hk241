@@ -4,21 +4,35 @@
     overflow-x: auto;
 
     .nav {
-        position: relative;
+        position: absolute;
         box-shadow: 3px 4px 15px black;
         overflow: hidden;
         padding-top: 10px;
         width: 75px;
         height: 100%;
+        background-color: white;
         // border-right: 1px solid #033f6c;
         transition: all .3s ease;
 
         // &:hover {
         //     width: 250px;
         // }
+
+        &.expand {
+            width: 100%;
+        }
+
+        &.expand > .logo_detail > .menu {
+            right: 45%;
+        }
+        
+        &.expand >  .cta {
+            align-items: center;
+        }
     }
 
     main {
+        margin-left: 76px;
         flex: 1;
         height: 100%;
         overflow-x: auto;
@@ -31,29 +45,62 @@
         }
 
         section {
-            height: 450px;
-            background-color: antiquewhite;
+            height: 560px;
         }
 
         footer {
+            background-color: #0395df;
             padding-left: 20px;
             height: auto;
             flex: 1;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            row-gap: 40px;
 
-            .img_warp {
-                height: 50px;
-                width: 50px;
-                object-fit: contain;
+            .warp {
+                display: flex;
+                align-items: center;
+                padding-right: 20px;
 
-                img {
-                    height: 100%;
+                .img_warp {
+                    height: 50px;
+                    width: 50px;
+                    object-fit: contain;
+                    text-align: center;
+    
+                    img {
+                        height: 100%;
+                    }
                 }
+
+                span {
+                    min-width: 280px;                
+                    color: white;
+                    margin-left: 20px;
+                    font-weight: bold;
+                    font-size: 1.7rem;
+                }
+            }
+
+            
+            
+
+            .icon_warp {
+                border-radius: 20px;
+                padding: 20px;
+                border: 2px solid black;
+                display: flex;
+                margin-left: auto;
+                margin-right: 20px;
+                justify-content: center;
+                font-size: 1.7rem;
             }
         }
     }
 }
 
-@media (min-width: 550px) {
+@media (min-width: 600px) {
     .nav {
         &:hover {
             width: 250px;
@@ -61,14 +108,5 @@
     }
 }
 
-.nav.expand {
-    width: 100%;
-}
 
-.nav.expand > .logo_detail > .menu {
-    right: 45%;
-}
 
-.nav.expand >  .cta {
-    align-items: center;
-}

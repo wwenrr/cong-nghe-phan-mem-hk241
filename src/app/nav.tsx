@@ -72,15 +72,14 @@ export default function Nav() {
         
 
         const navElement = document.querySelector('.nav');
-        if(navElement && window.innerWidth < 550) navElement.classList.toggle('expand');
+        if(navElement && window.innerWidth < 600) navElement.classList.toggle('expand');
     }
 
     const handleClose = () => {
         play()
 
         const navElement = document.querySelector('.nav');
-        if(navElement && navElement.classList.contains('expand') && window.innerWidth < 550) {
-            console.log("nhỏ hơn 550px")
+        if(navElement && navElement.classList.contains('expand') && window.innerWidth < 600) {
             navElement.classList.toggle('expand');
         }
     }

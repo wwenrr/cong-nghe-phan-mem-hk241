@@ -129,7 +129,7 @@
 }
 
 //pc
-@media (min-width: 550px) {
+@media (min-width: 600px) {
     .cta {
         .item {
             &:not(.active):hover::before {
@@ -142,7 +142,7 @@
             }
     
             &:not(.active):active {
-                transform: scale(1);
+                transform: scale(1.5);
             }
         }
     }
@@ -164,7 +164,7 @@
 
 
 //laplet
-@media (max-width: 550px) {
+@media (max-width: 600px) {
     .cta {
         .item {
             &:not(.active):active {
@@ -187,8 +187,9 @@
         .menu {
             position: absolute;
             width:  clamp(40px, 10%, 100px);
-            bottom: 100px;
+            bottom: 50px;
             right: 5px;
+            z-index: 999;
 
             cursor: pointer;
 
