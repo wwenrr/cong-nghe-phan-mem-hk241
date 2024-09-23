@@ -1,6 +1,6 @@
 .page_layout {
     display: flex;
-    height: 70dvh;
+    height: 100%;
     overflow-x: auto;
 
     .nav {
@@ -9,14 +9,9 @@
         overflow: hidden;
         padding-top: 10px;
         width: 75px;
-        height: 100%;
+        height: 100dvh;
         background-color: white;
-        // border-right: 1px solid #033f6c;
         transition: all .3s ease;
-
-        // &:hover {
-        //     width: 250px;
-        // }
 
         &.expand {
             width: 100%;
