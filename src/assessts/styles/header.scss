@@ -14,44 +14,70 @@
     }
 }
 
-.cta_a {
-    margin-right: 10vw;
-    display: flex;
-
-    a {
-        font-weight: bold;
-        padding-right: 3vw;
-        padding-top: 15px;
-        padding-bottom: 15px;
-        font-size: clamp(1.4rem, 1.3vw, 999px);
-
-        &:nth-child(4) {
-            border-right: 2px solid grey;
-        }
-
-        position: relative;
+header {
+    .title {
+        font-family: 'Playfair Display', serif;
+        display: flex;
+        flex-direction: column;
+        margin-right: auto;
+        margin-left: 200px;
+        gap: 5px;
+        font-size: 2rem;
+        // font-weight: bold;
     }
 
+    .cta_a {
+        margin-right: 10vw;
+        display: flex;
     
+        a {
+            font-weight: bold;
+            padding-right: 3vw;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            font-size: clamp(1.4rem, 1.3vw, 999px);
+    
+            &:nth-child(4) {
+                border-right: 2px solid grey;
+            }
+    
+            position: relative;
+        }
+    
+        
+    }
 }
 
+
+
 @media (min-width: 900px) {
-    .cta_a {
-        .active {
-            &:hover::before {
-                width: 80%;
+    header {
+
+        .cta_a {
+            .active {
+                &:hover::before {
+                    width: 80%;
+                }
+        
+                &::before {
+                    content: "";
+                    width: 0;
+                    height: 2px;
+                    background-color: black;
+                    position: absolute;
+                    transform: translate(-10%, 1300%);
+        
+                    transition: all .5s ease;
+                }
             }
-    
-            &::before {
-                content: "";
-                width: 0;
-                height: 2px;
-                background-color: black;
-                position: absolute;
-                transform: translate(-10%, 1300%);
-    
-                transition: all .5s ease;
-            }
+        }
+    }
+}
+
+@media (max-width: 1300px) {
+    header {
+        .title {
+            display: none;
         }
     }
 }
