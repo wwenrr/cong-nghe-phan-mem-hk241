@@ -16,17 +16,17 @@ const menu = [
     {
         logo: "https://cdn-icons-png.flaticon.com/128/9195/9195785.png",
         describe: "Thông Tin",
-        url: "/info"
+        url: "/thong-tin"
+    },
+    {
+        logo: "https://cdn-icons-png.flaticon.com/128/3233/3233468.png",
+        describe: "Máy In",
+        url: "/may-in"
     },
     {
         logo: "https://cdn-icons-png.flaticon.com/128/3525/3525026.png",
         describe: "Bảng Điều Khiển",
         url: "/#"
-    },
-    {
-        logo: "https://cdn-icons-png.flaticon.com/128/3233/3233468.png",
-        describe: "Máy In",
-        url: "/printer"
     },
     {
         logo: "https://cdn-icons-png.flaticon.com/128/1177/1177568.png",

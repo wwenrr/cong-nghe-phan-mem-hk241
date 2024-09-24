@@ -4,7 +4,7 @@ export default function() {
     return (
     <>
         <div className="">
-            hello
+            TRANG CHỦ
         </div>
     </>)
 }

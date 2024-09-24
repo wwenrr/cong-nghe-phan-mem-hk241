@@ -5,6 +5,7 @@ import Nav from "./nav";
 import '@styles/reset.css'
 import Home from "./page";
 import Warper from "./icon-warp";
+import Header from "./header";
 
 export const metadata: Metadata = {
   title: "HCMUT-SSPS",
@@ -20,6 +21,25 @@ const roboto = Roboto({
   subsets: ['latin'],
   weight: ['400', '700']
 })
+
+const cta_logo = [
+  {
+    icon: "https://cdn-icons-png.flaticon.com/128/145/145802.png",
+    url: "https://www.facebook.com/"
+  },
+  {
+    icon: "https://cdn-icons-png.flaticon.com/128/733/733553.png",
+    url: "https://github.com/wwenrr/cong-nghe-phan-mem-hk241"
+  },
+  {
+    icon: "https://cdn-icons-png.flaticon.com/128/3955/3955024.png",
+    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  },
+  {
+    icon: "https://cdn-icons-png.flaticon.com/128/3670/3670147.png",
+    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  }
+]
 
 export default function RootLayout({
   children,
@@ -38,12 +58,34 @@ export default function RootLayout({
             </div>
 
             <main>
-              <header>Im a header</header>
+              <header>
+                <Header />
+              </header>
 
               <section>
-                {children}
+                <div className="warper">
+                  {children}
+                </div>
               </section>
 
+              <footer>
+                <div className="layer_1">
+                  {
+                    cta_logo.map((item, index) => {
+                      return (
+                        <a className="warp" href={item.url} target="_blank">
+                          <img src={item.icon} alt="" />
+                        </a>
+                      )
+                    })
+                  }
+                </div>
+                <div className="layer_2">
+                  <span>Copyright &nbsp;
+                    <div className="warp"><img src="https://cdn-icons-png.flaticon.com/128/1294/1294340.png" alt="" /></div>
+                    &nbsp; 2024, Design By Your Mom </span>
+                </div>
+              </footer>
             </main>
           </div>
       </body>
