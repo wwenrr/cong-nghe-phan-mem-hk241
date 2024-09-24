@@ -16,6 +16,10 @@
 
 header {
     .title {
+        span {
+            color: #033f6c;
+        }
+
         font-family: 'Playfair Display', serif;
         display: flex;
         flex-direction: column;
