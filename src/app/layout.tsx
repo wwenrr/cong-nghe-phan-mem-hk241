@@ -83,7 +83,7 @@ export default function RootLayout({
                 <div className="layer_2">
                   <span>Copyright &nbsp;
                     <div className="warp"><img src="https://cdn-icons-png.flaticon.com/128/1294/1294340.png" alt="" /></div>
-                    &nbsp; 2024, Design By Your Mom </span>
+                    &nbsp; 2024, &nbsp;Design By Your Mom </span>
                 </div>
               </footer>
             </main>
