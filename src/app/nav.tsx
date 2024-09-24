@@ -26,7 +26,7 @@ const menu = [
     {
         logo: "https://cdn-icons-png.flaticon.com/128/3233/3233468.png",
         describe: "Máy In",
-        url: "#"
+        url: "/printer"
     },
     {
         logo: "https://cdn-icons-png.flaticon.com/128/1177/1177568.png",
@@ -65,8 +65,14 @@ export default function Nav() {
     }
 
     useEffect(() => {
+        // console.log(123)
 
-    }, [])
+        // if (typeof play === 'function') {
+        //     const intervalId = setInterval(play, 1000)
+
+        //     return () => clearInterval(intervalId);
+        // }
+    }, [play])
 
     const handleClick = () => {
         
