@@ -14,24 +14,24 @@ const menu = [
         url: "/"
     },
     {
-        logo: "https://cdn-icons-png.flaticon.com/128/9195/9195785.png",
-        describe: "Thông Tin",
-        url: "/thong-tin"
-    },
-    {
         logo: "https://cdn-icons-png.flaticon.com/128/3233/3233468.png",
         describe: "Máy In",
         url: "/may-in"
     },
     {
-        logo: "https://cdn-icons-png.flaticon.com/128/1177/1177568.png",
-        describe: "Người Dùng",
-        url: "#"
-    },
-    {
         logo: "https://cdn-icons-png.flaticon.com/128/9746/9746243.png",
         describe: "Tài Liệu",
-        url: "#"
+        url: "/tai-lieu"
+    },
+    {
+        logo: "https://cdn-icons-png.flaticon.com/128/9195/9195785.png",
+        describe: "Thông Tin",
+        url: "/thong-tin"
+    },
+    {
+        logo: "https://cdn-icons-png.flaticon.com/128/1177/1177568.png",
+        describe: "Người Dùng",
+        url: "/nguoi-dung"
     },
 ]
 

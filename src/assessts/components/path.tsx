@@ -17,6 +17,8 @@ const maping:Record<string, string> & { default: string } = {
     "/": "Trang Chủ",
     "thong-tin": "Thông Tin",
     "may-in": "Máy In",
+    "nguoi-dung": "Người Dùng",
+    "tai-lieu": "Tài Liệu",
 
     default: "not found!"
 }
@@ -31,6 +33,9 @@ export function Path() {
     const [arr, setArr] = useState<Array<tuble>>([])
 
     useEffect (() => {
+        document.cookie = "firstName=hehehe"
+        console.log(document.cookie) 
+
         const segments = path.split('/').filter(segment => segment);
 
         const arr: Array<tuble> = segments.map((segment, index) => ({
@@ -48,7 +53,7 @@ export function Path() {
     }, [])
 
     useEffect(() => {
-        console.log(arr)
+        // console.log(arr)
     }, [arr])
 
     return (
