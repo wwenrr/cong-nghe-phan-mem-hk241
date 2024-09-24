@@ -1,10 +1,10 @@
 import React from "react";
+import { Path } from "@/assessts/components/path";
 
 export default function() {
     return (
     <>
-        <div className="">
-            TRANG CHỦ
-        </div>
-    </>)
+        <Path />
+    </>
+    )
 }

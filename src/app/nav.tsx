@@ -24,18 +24,8 @@ const menu = [
         url: "/may-in"
     },
     {
-        logo: "https://cdn-icons-png.flaticon.com/128/3525/3525026.png",
-        describe: "Bảng Điều Khiển",
-        url: "/#"
-    },
-    {
         logo: "https://cdn-icons-png.flaticon.com/128/1177/1177568.png",
         describe: "Người Dùng",
-        url: "#"
-    },
-    {
-        logo: "https://cdn-icons-png.flaticon.com/128/535/535137.png",
-        describe: "Vị Trí",
         url: "#"
     },
     {
@@ -43,11 +33,6 @@ const menu = [
         describe: "Tài Liệu",
         url: "#"
     },
-    {
-        logo: "https://cdn-icons-png.flaticon.com/128/1946/1946436.png",
-        describe: "Trang Chủ",
-        url: "#"
-    }
 ]
 
 // ???

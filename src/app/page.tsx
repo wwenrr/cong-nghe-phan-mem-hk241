@@ -1,26 +1,24 @@
 import React from "react";
 import Nav from "./nav";
 import "@styles/home.scss"
+import Link from "next/link";
+import { tuble, props, Path} from "@/assessts/components/path";
 
-interface tuble {
-  name: string,
-  url: string
-}
-
-function Url(arr:Array<tuble>) {
-  arr.map(() => {
-    return (
-      <div className="">hi</div>
-    )
-  })
-}
+const arr: Array<tuble> = [
+  {
+    name: "Trang Chủ",
+    url: "/"
+  },
+  {
+    name: "Thông Tin",
+    url: "/thong-tin"
+  }
+];
 
 export default function Home() {
   return (
     <>
-      <div className="warp">
-          
-      </div>
+      <Path />
     </>
   );
 }

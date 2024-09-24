@@ -2,6 +2,7 @@
     height: 40px;
     width: 40px;
     cursor: pointer;
+    margin-right: 10px;
 
     img {
         object-fit: cover;
@@ -73,12 +74,20 @@ header {
         
                     transition: all .5s ease;
                 }
+
+                // &::after {
+                //     content: url("https://cdn-icons-png.flaticon.com/128/16026/16026574.png");
+                //     position: absolute;
+                //     height: 20px;
+                //     width: 20px;
+                //     transform: scale(0.1) translateY(-270%);
+                // }
             }
         }
     }
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1200px) {
     header {
         .title {
             display: none;
