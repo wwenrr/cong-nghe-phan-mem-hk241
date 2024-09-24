@@ -33,9 +33,6 @@ export function Path() {
     const [arr, setArr] = useState<Array<tuble>>([])
 
     useEffect (() => {
-        document.cookie = "firstName=hehehe"
-        console.log(document.cookie) 
-
         const segments = path.split('/').filter(segment => segment);
 
         const arr: Array<tuble> = segments.map((segment, index) => ({
@@ -50,7 +47,7 @@ export function Path() {
         })
 
         setArr(prev => arr)
-    }, [])
+    }, [path])
 
     useEffect(() => {
         // console.log(arr)

@@ -69,7 +69,6 @@
                 padding-right: 50px;
                 padding-left: 50px;
                 padding-top: 30px;
-                padding-bottom: 5px;
                 overflow-y: auto;
                 
                 margin: auto;
@@ -162,21 +161,21 @@
     }
 }
 
-@media (min-width: 900px) {
-    .nav {
-        &:hover {
-            width: 250px;
-        }
-    }
+// @media (min-width: 900px) {
+//     .nav {
+//         &:hover {
+//             width: 250px;
+//         }
+//     }
 
-    section {
-        .warper {
-            width: 73%;
-        }
-    }
-}
+//     section {
+//         .warper {
+//             width: 73%;
+//         }
+//     }
+// }
 
-@media (max-width: 900px) {
+@media (max-width: 600px) {
     section {
         .warper {
             width: 100%;

@@ -18,7 +18,7 @@ const arr: Array<tuble> = [
 export default function Home() {
   return (
     <>
-      <Path />
+      
     </>
   );
 }

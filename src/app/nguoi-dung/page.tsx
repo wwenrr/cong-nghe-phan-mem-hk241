@@ -4,7 +4,7 @@ import { Path } from "@/assessts/components/path";
 export default function() {
     return(
         <>
-            <Path />
+
         </>
     )
 }

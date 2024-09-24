@@ -6,6 +6,7 @@ import '@styles/reset.css'
 import Home from "./page";
 import Warper from "./icon-warp";
 import Header from "./header";
+import { Path } from "@/assessts/components/path";
 
 export const metadata: Metadata = {
   title: "HCMUT-SSPS",
@@ -64,6 +65,7 @@ export default function RootLayout({
 
               <section>
                 <div className="warper">
+                  <Path />
                   {children}
                 </div>
               </section>

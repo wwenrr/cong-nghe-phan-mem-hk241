@@ -2,6 +2,8 @@ import React from "react";
 import { Path } from "@/assessts/components/path";
 import style from "@styles/thong-tin.module.scss"
 
+
+// Thông Tin Sinh Viên :v
 function Thong_tin_ca_nhan() {
     return(
         <>
@@ -142,7 +144,7 @@ function Thong_tin_dao_tao() {
 
                 <div className={style.main}>
                     <div className={style.content}>
-                        <span>Tình trạng sinh viên</span>
+                        <span>Tình Trạng Sinh Viên</span>
                         <input type="text" 
                             placeholder="Đang Học / Thôi Học / ..."
                         />
@@ -167,11 +169,83 @@ function Thong_tin_dao_tao() {
     )
 }
 
+// Thông Tin Dịch Vụ :v
+
+function Thong_tin_dich_vu() {
+    return(
+        <>
+            <div className={style.small_box}>
+                <div className={style.inner_box}>
+                    <span>HCMUT - SSPS</span>
+                </div>
+
+                <div className={style.main}>
+                    <div className={style.content}>
+                        <span>Loại Hình Dịch Vụ: 
+                            <b>In Ấn</b> 
+                        </span>
+
+                        <hr className={style.custom_line} />
+                    </div>
+
+                    <div className={style.content}>
+                        <span>Đối Tượng Phục Vụ
+                            <b>
+                                Sinh Viên Các Hình Thức Đào Tạo
+                            </b>
+                        </span>
+
+                        <hr className={style.custom_line} />
+                    </div>
+
+                    <div className={style.content}>
+                        <span>Thời Gian Hoạt Động:
+                            <b>
+                                Thứ 2 - Thứ 7, 8h00 - 18h00
+                            </b>
+                        </span>
+
+                        <hr className={style.custom_line} />
+                    </div>
+
+                    <div className={style.content}>
+                        <span>Phạm Vi Dịch Vụ:
+                            <b>
+                                Nội Bộ Trường Đại Học Bách Khoa Tp.Hcm
+                            </b>
+                        </span>
+
+                        <hr className={style.custom_line} />
+                    </div>
+
+                    <div className={style.content}>
+                        <span>Hình Thức Thanh Toán:
+                            <b>
+                                Chuyển khoản, tiền mặt
+                            </b>
+                        </span>
+
+                        <hr className={style.custom_line} />
+                    </div>
+
+                    <div className={style.content}>
+                        <span> Chính Sách Bảo Hành:
+                            <b>
+                                Không
+                            </b>
+                        </span>
+
+                        <hr className={style.custom_line} />
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+
 export default function() {
     return (
         <>
-            <Path />
-
             <div className={style.box}>
                 <div className={style.title}>
                     <div className={style.warp}>
@@ -189,11 +263,17 @@ export default function() {
                 <br />
                 <br />
                 <br />
+                <p></p>
+
                 <div className={style.title}>
                     <div className={style.warp}>
                         <img src="https://cdn-icons-png.flaticon.com/128/3631/3631163.png" alt="" />
                     </div>
                     <span>Thông Tin Dịch Vụ</span>
+                </div>
+
+                <div className={style.box_wrapper}>
+                    <Thong_tin_dich_vu />
                 </div>
             </div>
         </>
