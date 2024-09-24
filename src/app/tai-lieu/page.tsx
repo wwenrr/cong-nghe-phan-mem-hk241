@@ -5,6 +5,8 @@ export default function() {
     return (
         <>
             <Path />
+
+            <iframe src="https://drive.google.com/file/d/11egLzOA0O3TmnyN8p5bfrwhNtyj4_4Bj/preview" width="640" height="480" allow="autoplay"></iframe>
         </>
     )
 }

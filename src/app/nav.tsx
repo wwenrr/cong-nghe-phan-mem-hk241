@@ -24,14 +24,14 @@ const menu = [
         url: "/tai-lieu"
     },
     {
-        logo: "https://cdn-icons-png.flaticon.com/128/9195/9195785.png",
-        describe: "Thông Tin",
-        url: "/thong-tin"
-    },
-    {
         logo: "https://cdn-icons-png.flaticon.com/128/1177/1177568.png",
         describe: "Người Dùng",
         url: "/nguoi-dung"
+    },
+    {
+        logo: "https://cdn-icons-png.flaticon.com/128/9195/9195785.png",
+        describe: "Thông Tin",
+        url: "/thong-tin"
     },
 ]
 
