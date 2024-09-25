@@ -55,12 +55,6 @@ export function Path() {
 
     return (
      <>
-        {arr.length === 0 && 
-            <div className={style.warp_loading}>
-                <div className={style.loader}></div>
-                <span>Loading...</span>
-            </div>
-        }
         {arr && <div className={style.path}>
             {arr.map((item, index) => {
                 return (
