@@ -59,11 +59,11 @@ export function Path() {
             {arr.map((item, index) => {
                 return (
                     <React.Fragment key={index}>
-                        <Link href={item.url} className={style.link}>
+                        <Link href={item.url} className={style.link}  key={index}>
                             {maping[item.name]}
                         </Link>
                         {index !== arr.length - 1 &&
-                            <div className={style.warp}>
+                            <div className={style.warp} key={index}>
                                 <div className={style.img_warp}>
                                     <img src="https://cdn-icons-png.flaticon.com/128/3585/3585438.png" alt="" />
                                 </div>

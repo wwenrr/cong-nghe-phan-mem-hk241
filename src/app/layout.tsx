@@ -75,7 +75,7 @@ export default function RootLayout({
                   {
                     cta_logo.map((item, index) => {
                       return (
-                        <a className="warp" href={item.url} target="_blank">
+                        <a className="warp" href={item.url} target="_blank" key={index}>
                           <img src={item.icon} alt="" />
                         </a>
                       )

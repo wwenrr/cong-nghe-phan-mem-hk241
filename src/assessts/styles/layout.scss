@@ -70,6 +70,8 @@
                 padding-left: 50px;
                 padding-top: 30px;
                 overflow-y: auto;
+                display: flex;
+                flex-direction: column;
                 
                 margin: auto;
                 height: 100%;
@@ -78,8 +80,7 @@
                 // border-radius: 10px;
                 
                 background-image: linear-gradient(to bottom, #f5f7fa 0%, #c3cfe2 100%);
-
-
+                
                 // box-shadow: 3px 4px #D2E0FB;
             }
         }
