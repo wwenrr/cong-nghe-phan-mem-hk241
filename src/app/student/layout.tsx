@@ -1,3 +1,5 @@
+'use client'
+
 import type { Metadata } from "next";
 import {Roboto } from '@next/font/google'
 import '@styles/layout.scss'
@@ -5,22 +7,9 @@ import Nav from "./nav";
 import '@styles/reset.css'
 import Header from "./header";
 import {Path} from "@/assessts/components/path";
-import React from "react";
-
-export const metadata: Metadata = {
-  title: "HCMUT-SSPS",
-  description: "Bài Tập Lớn Công Nghệ Phần Mềm HK241",
-};
-
-export const viewport = {
-  name: "viewport",
-  content: "width=device-width, initial-scale=1.0"
-};
-
-const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['400', '700']
-})
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Cookies from 'js-cookie';
 
 const cta_logo = [
   {
@@ -46,51 +35,60 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const router = useRouter()
+  const [mounted, setMounted] = useState(false)
 
-  return (
-    <html lang="en">
-    <head>
-      <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/2143/2143615.png"/>
-    </head>
-    <body className={roboto.className}>
-          <div className="page_layout">
-            <div className="nav">
-              <Nav/>
+  useEffect(() => {
+        const token = Cookies.get('token')
+        
+        if(!token)
+          window.location.href = '/';
+        else {
+          setMounted(true)
+        }
+        
+    }, [router]);
+
+  if(mounted)
+    return (
+          <>
+            <div className="page_layout">
+              <div className="nav">
+                <Nav/>
+              </div>
+
+              <main>
+                <header>
+                  <Header />
+                </header>
+
+                <section>
+                  <div className="warper">
+                    <Path />
+                    {children}
+                  </div>
+                </section>
+
+                <footer>
+                  <div className="layer_1">
+                    {
+                      cta_logo.map((item, index) => {
+                        return (
+                          <a className="warp" href={item.url} target="_blank" key={index}>
+                            <img src={item.icon} alt="" />
+                          </a>
+                        )
+                      })
+                    }
+                  </div>
+                  <div className="layer_2">
+                    <span>Copyright &nbsp;
+                      <div className="warp"><img src="https://cdn-icons-png.flaticon.com/128/1294/1294340.png" alt="" /></div>
+                      &nbsp; 2024, &nbsp;Design By Your Mom </span>
+                  </div>
+                </footer>
+              </main>
             </div>
-
-            <main>
-              <header>
-                <Header />
-              </header>
-
-              <section>
-                <div className="warper">
-                  <Path />
-                  {children}
-                </div>
-              </section>
-
-              <footer>
-                <div className="layer_1">
-                  {
-                    cta_logo.map((item, index) => {
-                      return (
-                        <a className="warp" href={item.url} target="_blank" key={index}>
-                          <img src={item.icon} alt="" />
-                        </a>
-                      )
-                    })
-                  }
-                </div>
-                <div className="layer_2">
-                  <span>Copyright &nbsp;
-                    <div className="warp"><img src="https://cdn-icons-png.flaticon.com/128/1294/1294340.png" alt="" /></div>
-                    &nbsp; 2024, &nbsp;Design By Your Mom </span>
-                </div>
-              </footer>
-            </main>
-          </div>
-      </body>
-    </html>
-  );
+          </>
+    );
 }

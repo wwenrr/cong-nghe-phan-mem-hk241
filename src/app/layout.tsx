@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <head>
             <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/2143/2143615.png"/>
         </head>
-        <body>
+        <body className={roboto.className}>
             {children}
         </body>
         </html>

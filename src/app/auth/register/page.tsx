@@ -9,6 +9,7 @@ import {fetch_otp_api, fetch_register_api} from "@/assessts/function/fetch";
 import ArrowBackIosNewIcon  from '@mui/icons-material/ArrowBack'
 import { useRouter } from "next/navigation";
 import Router from "next/router";
+import Cookies from 'js-cookie';
 
 // @ts-ignore
 function OtpSend({err, setErr, OtpSent, setOtpSent, email, setEmail}) {
@@ -128,8 +129,9 @@ function Register({err, setErr, OtpSent, setOtpSent, email}) {
             setLoading(true)
             setFormSent(true)
             const response = await fetch_register_api(formData);
-            
-            router.push("/")
+
+            Cookies.set('token', response['token'], { expires: 1 });
+            window.location.href = '/student';
         } catch(error) {
             // @ts-ignore
             setErr(error.message);
@@ -149,7 +151,9 @@ function Register({err, setErr, OtpSent, setOtpSent, email}) {
                 sx={{
                     mt: 0,
                     display: 'flex',
-                    flexDirection: 'column'
+                    flexDirection: 'column',
+                    width: 370,
+                    alignItems: 'center'
                 }}>
                     <ArrowBackIosNewIcon 
                         sx={{
@@ -183,7 +187,7 @@ function Register({err, setErr, OtpSent, setOtpSent, email}) {
                                 '& .MuiInputBase-root.Mui-disabled': {
                                     backgroundColor: '#f0f0f0',
                                 },
-                                width: 200
+                                width: 250
                             }}
                 />
 
@@ -205,7 +209,7 @@ function Register({err, setErr, OtpSent, setOtpSent, email}) {
                                 '& .MuiInputBase-root.Mui-disabled': {
                                     backgroundColor: '#f0f0f0',
                                 },
-                                width: 200,
+                                width: 250,
                                 mt: 2
                             }}
                 />
@@ -228,7 +232,7 @@ function Register({err, setErr, OtpSent, setOtpSent, email}) {
                                 '& .MuiInputBase-root.Mui-disabled': {
                                     backgroundColor: '#f0f0f0',
                                 },
-                                width: 200,
+                                width: 250,
                                 mt: 2
                             }}
                 />
@@ -251,7 +255,7 @@ function Register({err, setErr, OtpSent, setOtpSent, email}) {
                                 '& .MuiInputBase-root.Mui-disabled': {
                                     backgroundColor: '#f0f0f0',
                                 },
-                                width: 200,
+                                width: 250,
                                 mt: 2,
                                 mb: 3
                             }}
@@ -337,6 +341,14 @@ export default function Page() {
                             <Link href="/auth/login">
                                 Đã có tài khoản ? Đăng nhập
                             </Link>
+
+                            {/* <Typography sx={{
+                                marginTop: 0.5,
+                                fontSize: '1.3rem',
+                                cursor: 'pointer'
+                            }}>
+                                Đã gửi Otp ? Tạo tài khoản
+                            </Typography> */}
                         </Typography>}
 
                         {err.length > 0 && <Alert severity="error" color="error"

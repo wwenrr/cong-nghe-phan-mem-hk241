@@ -21,13 +21,8 @@ const roboto = Roboto({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en">
-        <head>
-            <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/2143/2143615.png"/>
-        </head>
-        <body>
+        <section>
             {children}
-        </body>
-        </html>
+        </section>
     );
 }

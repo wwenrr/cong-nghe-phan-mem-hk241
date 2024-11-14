@@ -1,4 +1,4 @@
-const url:string = 'https://project-cnpm.onrender.com/api'
+const url:string = 'https://cnpmbe.hcmutssps.id.vn/api'
 
 function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -36,11 +36,7 @@ export async function fetch_otp_api(email:string) {
 }
 
 export async function fetch_register_api(formData:any) {
-    await sleep(1000);
-
-    console.log(formData);
-    console.log(formData['otp'].toString());
-    
+    await sleep(1000);    
     
     return fetch(`${url}/account/register`, {
         headers: {
@@ -78,4 +74,40 @@ export async function fetch_register_api(formData:any) {
         .catch(error => {
             throw new Error(error.message);
         });
+}
+
+export async function fetch_login(formData:any) {
+    await sleep(1000);
+
+    return fetch(`${url}/account/login`, {
+        method: "POST",
+        body: JSON.stringify({
+            'email': formData['email'],
+            'password': formData['password']
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(
+        response => {
+            if(!response.ok) {
+                return response.json().then(errorData => {
+                    throw new Error(errorData.message || 'Có lỗi xảy ra');
+                });
+            }
+
+            return response.json()
+        }
+    )
+    .then(data => {
+        if(data['code'] !== 'success') {
+            throw new Error(data['code'])
+        }
+
+        return data
+    })
+    .catch(error => {
+        throw new Error(error.message);
+    });
 }

@@ -3,8 +3,9 @@
 import React, { useEffect, useState } from "react";
 import "@styles/nav.scss"
 import Link from "next/link";
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import useSound from "use-sound";
+import Cookies from 'js-cookie';
 
 const menu = [
     {
@@ -48,10 +49,6 @@ export default function Nav() {
 
         return path.includes(e);
     }
-
-    useEffect(() => {
-
-    }, [play])
 
     const handleClick = () => {
         const navElement = document.querySelector('.nav');

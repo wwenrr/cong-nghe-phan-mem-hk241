@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import { Path } from "@/assessts/components/path";
 import style from "@styles/may-in.module.scss"

@@ -2,14 +2,21 @@
 
 import {useRouter} from "next/navigation";
 import {useEffect} from "react";
+import Cookies from 'js-cookie';
 
 export default function NotFoundPage() {
     const router = useRouter();
 
     useEffect(() => {
-        setTimeout(() => {
-            router.push("/auth/login")
-        }, );
+        const token = Cookies.get('token')
+
+        console.log(token);
+        
+
+        if(token)
+            router.push("/student/")
+
+        router.push("/auth/login")
     }, [router]);
 
     return (

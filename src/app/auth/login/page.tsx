@@ -1,16 +1,50 @@
 'use client'
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { TextField, Button, Box, Typography, Container, Avatar, CircularProgress, Skeleton } from '@mui/material';
+import { TextField, Button, Box, Typography, Container, Avatar, CircularProgress, Skeleton, Alert } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { fetch_login } from "@/assessts/function/fetch";
+import Cookies from 'js-cookie';
+import { useRouter } from "next/navigation";
 
 export default function Page() {
     const [mounted, setMounted] = useState(false)
+    const emailRef = useRef<HTMLInputElement>(null)
+    const passwordRef = useRef<HTMLInputElement>(null)
+    const [err, setErr] = useState('')
+    const [loading, setLoading] = useState(false)
+    const router = useRouter();
 
     useEffect(() => {
         setMounted(true)
     })
+
+    // @ts-ignore
+    const handleSubmit = async (e) => {
+        setErr('')
+        e.preventDefault();
+
+        const formData = {
+            email: emailRef.current?.value || '',
+            password: passwordRef.current?.value || '',
+        };
+
+        try {
+            if(formData['email'] == '' || formData['password'] == '')
+                throw Error('Input không hợp lệ')
+            setLoading(true)
+            const res = await fetch_login(formData)
+
+            Cookies.set('token', res['token'], { expires: 1 });
+            window.location.href = '/student';
+        } catch(error) {
+            // @ts-ignore
+            setErr(error.message)
+        }
+
+        setLoading(false)
+    }
 
     if(mounted)
         return(
@@ -38,6 +72,8 @@ export default function Page() {
 
                         <Box component="form" sx={{ mt: 1 }}>
                             <TextField
+                                disabled={loading}
+                                inputRef={emailRef}
                                 margin="normal"
                                 required
                                 fullWidth
@@ -58,6 +94,8 @@ export default function Page() {
                                 }}
                             />
                             <TextField
+                                disabled={loading}
+                                inputRef={passwordRef}
                                 variant="standard"
                                 margin="normal"
                                 required
@@ -77,7 +115,8 @@ export default function Page() {
                                     },
                                 }}
                             />
-                            <Button
+                            
+                             <Button
                                 fullWidth
                                 variant="contained"
                                 color="primary"
@@ -93,9 +132,12 @@ export default function Page() {
                                         backgroundColor: 'primary.dark',
                                     },
                                 }}
+                                disabled={loading}
+                                onClick={handleSubmit}
                             >
-                                Đăng nhập
+                                {loading ? <CircularProgress size={24} color="inherit" /> : 'Đăng nhập'}
                             </Button>
+                            
                             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
                                 <Typography variant="body2" sx={{ fontSize: '1.2rem' }}>
                                     <Link href="/auth/register">
@@ -104,6 +146,18 @@ export default function Page() {
                                 </Typography>
                             </Box>
                         </Box>
+
+                        {err.length > 0 && <Alert severity="error" color="error"
+                                variant="outlined"
+                                sx={{
+                                    // border: 'none',
+                                    marginTop: 3,
+                                    // bgcolor: 'background.paper',
+                                    fontSize: '1.3rem',
+                                }}
+                        >
+                            {err}
+                        </Alert>}
                     </Box>
                 </Container>
             </>
