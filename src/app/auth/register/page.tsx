@@ -167,7 +167,12 @@ function Register({err, setErr, OtpSent, setOtpSent, email}) {
                             inputRef={usernameRef}
                             value={email}
                             required
-                            disabled
+                            // disabled
+                            slotProps={{
+                                input: {
+                                  readOnly: true,
+                                },
+                              }}
                             sx={{
                                 '& .MuiInputBase-root': {
                                     fontSize: '1.5rem',
@@ -230,7 +235,7 @@ function Register({err, setErr, OtpSent, setOtpSent, email}) {
 
                 <TextField id="outlined-basicd34v"
                             label="Mã OTP"
-                            variant="standard"
+                            variant="filled"
                             type="text"
                             autoComplete="current-phone"
                             inputRef={otpRef}
