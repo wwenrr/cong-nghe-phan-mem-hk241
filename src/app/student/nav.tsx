@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import "@styles/nav.scss"
 import Link from "next/link";
 import { usePathname } from 'next/navigation'
@@ -11,27 +10,27 @@ const menu = [
     {
         logo: "https://cdn-icons-png.flaticon.com/128/1946/1946436.png",
         describe: "Trang Chủ",
-        url: "/"
+        url: "/student"
     },
     {
         logo: "https://cdn-icons-png.flaticon.com/128/3233/3233468.png",
         describe: "Máy In",
-        url: "/may-in"
+        url: "/student/may-in"
     },
     {
         logo: "https://cdn-icons-png.flaticon.com/128/9746/9746243.png",
         describe: "Tài Liệu",
-        url: "/tai-lieu"
+        url: "/student/tai-lieu"
     },
     {
         logo: "https://cdn-icons-png.flaticon.com/128/1177/1177568.png",
         describe: "Người Dùng",
-        url: "/nguoi-dung"
+        url: "/student/nguoi-dung"
     },
     {
         logo: "https://cdn-icons-png.flaticon.com/128/9195/9195785.png",
         describe: "Thông Tin",
-        url: "/thong-tin"
+        url: "/student/thong-tin"
     },
 ]
 
@@ -42,26 +41,19 @@ export default function Nav() {
     const [play] = useSound('/sounds/click.mp3')
 
     const isInclude = (e: string):boolean => {
-    
-        if(e == '/' && path=='/') return true;
-        else if(e == '/')         return false
-        
+        const lastSegment = path.split('/').pop();
+
+        if(e == '/student' && lastSegment=='student') return true;
+        else if(e == '/student')         return false
+
         return path.includes(e);
     }
 
     useEffect(() => {
-        // console.log(123)
 
-        // if (typeof play === 'function') {
-        //     const intervalId = setInterval(play, 1000)
-
-        //     return () => clearInterval(intervalId);
-        // }
     }, [play])
 
     const handleClick = () => {
-        
-
         const navElement = document.querySelector('.nav');
         if(navElement && window.innerWidth < 600) navElement.classList.toggle('expand');
     }
@@ -89,14 +81,14 @@ export default function Nav() {
             {menu.map((item, index) => {
                 return (
                     isInclude(item.url) ? (
-                        <div key={index} className="item active" title={item.describe}>
+                        <div key={item.url} className="item active" title={item.describe}>
                             <div className="logo">  
                                 <img src={item.logo} alt="logo" />
                             </div>
                             <span>{item.describe}</span>
                         </div>
                     ) : (
-                        <Link href={item.url} key={index} className="item" onClick={handleClose} title={item.describe}>
+                        <Link href={item.url} key={item.url} className="item" onClick={handleClose} title={item.describe}>
                             <div className="logo">
                                 <img src={item.logo} alt="logo" />
                             </div>

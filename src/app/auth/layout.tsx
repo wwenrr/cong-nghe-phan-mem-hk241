@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import {Roboto } from '@next/font/google'
+import '@styles/auth/layout.scss'
 import React from "react";
+import '@styles/reset.css'
 
 export const metadata: Metadata = {
-    title: "Trang chủ",
+    title: "Xác thực tài khoản",
     description: "Bài Tập Lớn Công Nghệ Phần Mềm HK241",
 };
 
