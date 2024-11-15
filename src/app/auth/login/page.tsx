@@ -117,6 +117,7 @@ export default function Page() {
                             />
                             
                              <Button
+                                type="submit"
                                 fullWidth
                                 variant="contained"
                                 color="primary"
