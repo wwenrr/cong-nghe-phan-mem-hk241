@@ -41,9 +41,8 @@ export default function Page() {
         } catch(error) {
             // @ts-ignore
             setErr(error.message)
+            setLoading(false)
         }
-
-        setLoading(false)
     }
 
     if(mounted)
