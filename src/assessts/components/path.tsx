@@ -15,6 +15,7 @@ export interface props {
 
 const maping:Record<string, string> & { default: string } = {
     "/": "Trang Chủ",
+    "student": "Người dùng",
     "thong-tin": "Thông Tin",
     "may-in": "Máy In",
     "nguoi-dung": "Người Dùng",
@@ -25,11 +26,8 @@ const maping:Record<string, string> & { default: string } = {
 
 type MappingKeys = string;
 
-// const path_test:string = "/thong-tin"
-
 export function Path() {
     const path = usePathname()
-    // const path = path_test
     const [arr, setArr] = useState<Array<tuble>>([])
 
     useEffect (() => {
@@ -58,12 +56,12 @@ export function Path() {
         {arr && <div className={style.path}>
             {arr.map((item, index) => {
                 return (
-                    <React.Fragment key={index}>
-                        <Link href={item.url} className={style.link}  key={index}>
+                    <React.Fragment key={`path-${index}`}>
+                        <Link href={`/student/${item.url}`} className={style.link}>
                             {maping[item.name]}
                         </Link>
                         {index !== arr.length - 1 &&
-                            <div className={style.warp} key={index}>
+                            <div className={style.warp}>
                                 <div className={style.img_warp}>
                                     <img src="https://cdn-icons-png.flaticon.com/128/3585/3585438.png" alt="" />
                                 </div>

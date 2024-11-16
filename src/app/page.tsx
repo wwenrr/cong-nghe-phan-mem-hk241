@@ -1,24 +1,31 @@
-import React from "react";
-import Nav from "./nav";
-import "@styles/home.scss"
-import Link from "next/link";
-import { tuble, props, Path} from "@/assessts/components/path";
+// /app/page.tsx
+'use client'
+import {useRouter} from "next/navigation";
+import Cookies from 'js-cookie';
+import React, { useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-const arr: Array<tuble> = [
-  {
-    name: "Trang Chủ",
-    url: "/"
-  },
-  {
-    name: "Thông Tin",
-    url: "/thong-tin"
-  }
-];
+const HomePage = () => {
+    const router = useRouter();
+    
+    useEffect(() => {
+        const token = Cookies.get('token')
 
-export default function Home() {
-  return (
-    <>
-      
-    </>
-  );
-}
+        console.log(token);
+        
+        
+        if(token)
+            window.location.href = '/student'
+
+        else 
+           window.location.href = "/auth/login"
+    }, [router]);
+
+    return (
+        <div>
+            
+        </div>
+    );
+};
+
+export default HomePage;
