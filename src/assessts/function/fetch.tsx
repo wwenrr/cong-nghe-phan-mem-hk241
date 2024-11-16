@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+
 const url:string = 'https://cnpmbe.hcmutssps.id.vn/api'
 
 function sleep(ms: number) {
@@ -5,7 +7,7 @@ function sleep(ms: number) {
 }
 
 export async function fetch_otp_api(email:string) {
-    await sleep(1000);
+    await sleep(500);
 
     return fetch(`${url}/account/otp`, {
         method: 'POST',
@@ -30,13 +32,10 @@ export async function fetch_otp_api(email:string) {
                 throw new Error(data['msg'])
             return data;
         })
-        .catch(error => {
-            throw new Error(error.message);
-        });
 }
 
 export async function fetch_register_api(formData:any) {
-    await sleep(1000);    
+    await sleep(500);    
     
     return fetch(`${url}/account/register`, {
         headers: {
@@ -71,9 +70,6 @@ export async function fetch_register_api(formData:any) {
 
             return data
         })
-        .catch(error => {
-            throw new Error(error.message);
-        });
 }
 
 export async function fetch_login(formData:any) {
@@ -107,7 +103,31 @@ export async function fetch_login(formData:any) {
 
         return data
     })
-    .catch(error => {
-        throw new Error(error.message);
-    });
+}
+
+export async function fetch_account(token:string | null) {
+
+    return fetch(`${url}/account`, {
+        method: 'GET', 
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+        .then(response => {
+            if(!response.ok) {
+                return response.json().then(errorData => {
+                    throw new Error(errorData.message || 'Có lỗi xảy ra');
+                });
+            }
+
+            return response.json()
+        })
+        .then(data => {
+            if(data['code'] !== 'success') {
+                throw new Error(data['code'])
+            }
+    
+            return data
+        })
 }

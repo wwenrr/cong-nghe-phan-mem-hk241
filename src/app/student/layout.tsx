@@ -1,5 +1,3 @@
-'use client'
-
 import type { Metadata } from "next";
 import {Roboto } from '@next/font/google'
 import '@styles/layout.scss'
@@ -8,8 +6,9 @@ import '@styles/reset.css'
 import Header from "./header";
 import {Path} from "@/assessts/components/path";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import Cookies from 'js-cookie';
+import { redirect } from "next/navigation";
+import { fetch_account } from "@/assessts/function/fetch";
+import { cookies } from "next/headers";
 
 const cta_logo = [
   {
@@ -30,65 +29,78 @@ const cta_logo = [
   }
 ]
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const router = useRouter()
-  const [mounted, setMounted] = useState(false)
+  // const router = useRouter()
+  // const [mounted, setMounted] = useState(false)
 
-  useEffect(() => {
-        const token = Cookies.get('token')
+  // useEffect(() => {
+  //       const token = Cookies.get('token')
         
-        if(!token)
-          window.location.href = '/';
-        else {
-          setMounted(true)
-        }
+  //       if(!token)
+  //         window.location.href = '/';
+  //       else {
+  //         setMounted(true)
+  //       }
         
-    }, [router]);
+  //   }, [router]);  
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("token");
+  const token = accessToken ? accessToken.value : '';
 
-  if(mounted)
-    return (
-          <>
-            <div className="page_layout">
-              <div className="nav">
-                <Nav/>
-              </div>
+  try {
+    const account = await fetch_account(token);
 
-              <main>
-                <header>
-                  <Header />
-                </header>
-
-                <section>
-                  <div className="warper">
-                    <Path />
-                    {children}
-                  </div>
-                </section>
-
-                <footer>
-                  <div className="layer_1">
-                    {
-                      cta_logo.map((item, index) => {
-                        return (
-                          <a className="warp" href={item.url} target="_blank" key={index}>
-                            <img src={item.icon} alt="" />
-                          </a>
-                        )
-                      })
-                    }
-                  </div>
-                  <div className="layer_2">
-                    <span>Copyright &nbsp;
-                      <div className="warp"><img src="https://cdn-icons-png.flaticon.com/128/1294/1294340.png" alt="" /></div>
-                      &nbsp; 2024, &nbsp;Design By Your Mom </span>
-                  </div>
-                </footer>
-              </main>
+    if(account['account']['role'] === 'student')
+      return (
+        <>
+          <div className="page_layout">
+            <div className="nav">
+              <Nav/>
             </div>
-          </>
-    );
+
+            <main>
+              <header>
+                <Header token={token}/>
+              </header>
+
+              <section>
+                <div className="warper">
+                  <Path />
+                  {children}
+                </div>
+              </section>
+
+              <footer>
+                <div className="layer_1">
+                  {
+                    cta_logo.map((item, index) => {
+                      return (
+                        <a className="warp" href={item.url} target="_blank" key={index}>
+                          <img src={item.icon} alt="" />
+                        </a>
+                      )
+                    })
+                  }
+                </div>
+                <div className="layer_2">
+                  <span>Copyright &nbsp;
+                    <div className="warp"><img src="https://cdn-icons-png.flaticon.com/128/1294/1294340.png" alt="" /></div>
+                    &nbsp; 2024, &nbsp;Design By Your Mom </span>
+                </div>
+              </footer>
+            </main>
+          </div>
+        </>
+  );
+      
+  } catch (error) {
+    //@ts-ignore
+    console.log(error.message);
+    
+    redirect('/');
+  }
 }
