@@ -14,7 +14,6 @@ const HomePage = async () => {
             throw new Error("Err")
 
         const token: string = accessToken.value; 
-        console.log(headersList.get('user-agent'));
         
         if(!headersList.get('user-agent'))
             throw new Error("Err")

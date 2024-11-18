@@ -43,7 +43,6 @@ export default async function RootLayout({
         throw new Error("Err")
 
     const token: string = accessToken.value; 
-    console.log(headersList.get('user-agent'));
     
     if(!headersList.get('user-agent'))
         throw new Error("Err")
@@ -96,8 +95,6 @@ export default async function RootLayout({
       
   } catch (error) {
     //@ts-ignore
-    console.log(error.message);
-    
     redirect('/');
   }
 
