@@ -106,7 +106,6 @@ export async function fetch_login(formData:any) {
 }
 
 export async function fetch_account(token:string | null) {
-
     return fetch(`${url}/account`, {
         method: 'GET', 
         headers: {

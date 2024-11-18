@@ -34,19 +34,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const router = useRouter()
-  // const [mounted, setMounted] = useState(false)
-
-  // useEffect(() => {
-  //       const token = Cookies.get('token')
-        
-  //       if(!token)
-  //         window.location.href = '/';
-  //       else {
-  //         setMounted(true)
-  //       }
-        
-  //   }, [router]);  
   const cookieStore = cookies();
   const accessToken = cookieStore.get("token");
   const token = accessToken ? accessToken.value : '';
