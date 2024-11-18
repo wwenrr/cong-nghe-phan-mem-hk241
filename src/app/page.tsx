@@ -1,31 +1,33 @@
 // /app/page.tsx
-'use client'
-import {useRouter} from "next/navigation";
-import Cookies from 'js-cookie';
-import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { fetch_account } from "@/assessts/function/fetch";
+import { cookies, headers  } from "next/headers";
+import { redirect } from "next/navigation";
 
-const HomePage = () => {
-    const router = useRouter();
-    
-    useEffect(() => {
-        const token = Cookies.get('token')
+const HomePage = async () => {
+    try {
+        const headersList = headers();
+        const cookieStore = cookies();
+        const accessToken = cookieStore.get("token");
 
-        console.log(token);
+        if(!accessToken)
+            throw new Error("Err")
+
+        const token: string = accessToken.value; 
+        console.log(headersList.get('user-agent'));
         
+        if(!headersList.get('user-agent'))
+            throw new Error("Err")
+
+        //@ts-ignore
+        const account = await fetch_account(token, headersList.get('user-agent'));
+
+        if(account['account']['role'] == 'student')
+            redirect('/student');
+    } catch(err) {
+        redirect('/auth/login');
+    }
         
-        if(token)
-            window.location.href = '/student'
-
-        else 
-           window.location.href = "/auth/login"
-    }, [router]);
-
-    return (
-        <div>
-            
-        </div>
-    );
 };
 
 export default HomePage;

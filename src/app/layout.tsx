@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {Roboto } from '@next/font/google'
 import React from "react";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
     title: "Trang chủ",
