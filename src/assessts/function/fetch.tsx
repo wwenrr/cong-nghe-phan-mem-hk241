@@ -6,6 +6,7 @@ function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+//Call form client side
 export async function fetch_otp_api(email:string) {
     await sleep(500);
 
@@ -27,13 +28,13 @@ export async function fetch_otp_api(email:string) {
             return response.json();
         })
         .then(data => {
-            console.log('Dữ liệu nhận được từ API:', data);
             if(data['code'] == 'error')
                 throw new Error(data['msg'])
             return data;
         })
 }
 
+//Call form client side
 export async function fetch_register_api(formData:any) {
     await sleep(500);    
     
@@ -66,12 +67,11 @@ export async function fetch_register_api(formData:any) {
                 throw new Error(data['msg'])
             }
 
-            console.log(data);
-
             return data
         })
 }
 
+//Call form client side
 export async function fetch_login(formData:any) {
     await sleep(1000);
 
@@ -105,6 +105,7 @@ export async function fetch_login(formData:any) {
     })
 }
 
+//Call form server side
 export async function fetch_account(token:string | null, userAgent:string) {    
     return fetch(`${url}/account`, {
         method: 'GET', 
@@ -117,12 +118,9 @@ export async function fetch_account(token:string | null, userAgent:string) {
     .then(response => {
         if (!response.ok) {
             return response.text().then(errorData => {
-                // Kiểm tra xem phản hồi có phải là HTML hay không
-                if (errorData.startsWith('<html>')) {
-                    throw new Error('Received an HTML response, possibly an error page');
-                }
-                const errorJson = JSON.parse(errorData);
-                throw new Error(errorJson.message || 'Có lỗi xảy ra');
+
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
             });
         }
     
@@ -130,11 +128,10 @@ export async function fetch_account(token:string | null, userAgent:string) {
         return response.json();
     })
     .then(data => {
-        console.log(data);
-        return data;
-    })
-    .catch(error => {
-        console.error('Error:', error.message);
-    });
-    
+        if(data['code'] !== 'success') {
+            throw new Error(data['msg'])
+        }
+
+        return data
+    })    
 }

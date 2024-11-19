@@ -3,9 +3,7 @@ import '@styles/header.scss'
 import Logout from "@/assessts/components/Logout";
 
 // @ts-ignore
-export default function Header({token}) {
-    console.log(token);
-    
+export default function Header() {    
     return (
         <>
             <div className="title">

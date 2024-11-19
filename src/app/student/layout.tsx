@@ -38,7 +38,7 @@ export default async function RootLayout({
     const headersList = headers();
     const cookieStore = cookies();
     const accessToken = cookieStore.get("token");
-
+    
     if(!accessToken)
         throw new Error("Err")
 
@@ -50,6 +50,7 @@ export default async function RootLayout({
     //@ts-ignore
     const account = await fetch_account(token, headersList.get('user-agent'));
     
+    
     if(account['account']['role'] === 'student')
       return (
         <>
@@ -60,7 +61,7 @@ export default async function RootLayout({
 
             <main>
               <header>
-                <Header token={token}/>
+                <Header/>
               </header>
 
               <section>
@@ -97,9 +98,4 @@ export default async function RootLayout({
     //@ts-ignore
     redirect('/');
   }
-
-  return (
-    <>
-    </>
-  )
 }

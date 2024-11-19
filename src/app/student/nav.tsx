@@ -39,7 +39,6 @@ const menu = [
 
 export default function Nav() {
     const path = usePathname()
-    const [play] = useSound('/sounds/click.mp3')
 
     const isInclude = (e: string):boolean => {
         const lastSegment = path.split('/').pop();
@@ -56,8 +55,6 @@ export default function Nav() {
     }
 
     const handleClose = () => {
-        play()
-
         const navElement = document.querySelector('.nav');
         if(navElement && navElement.classList.contains('expand') && window.innerWidth < 600) {
             navElement.classList.toggle('expand');
