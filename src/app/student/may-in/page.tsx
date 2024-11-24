@@ -154,7 +154,10 @@ export default function() {
         <>
             <div className={style.layout}>
             <Dialog open={openDialog} onClose={handleCloseDialog}>
-                <Content printer={printerData.find(printer  => printer._id == selectedRow)}/>
+                <Content printer={
+                  //@ts-ignore
+                  printerData.find(printer  => printer._id == selectedRow)}
+                />
                 <DialogActions>
                 <Button onClick={handleCloseDialog} color="secondary">
                     Đóng
