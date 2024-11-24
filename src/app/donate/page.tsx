@@ -16,6 +16,7 @@ export default function Foo() {
         if(!searchParams.get('money'))
             redirect("/")
 
+        const money = searchParams.get('money');
         const token = Cookies.get('token')
         
         function sleep(ms: number) {
@@ -24,7 +25,7 @@ export default function Foo() {
 
         async function foo() {
             //@ts-ignore
-            const result = await donate_money(token, searchParams.get('money'));
+            const result = await donate_money(token, parseInt(money, 10));
 
             console.log(result);
             setLoading(false)
