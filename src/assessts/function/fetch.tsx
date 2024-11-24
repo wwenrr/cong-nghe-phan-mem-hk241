@@ -6,6 +6,7 @@ function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+//Call form client side
 export async function fetch_otp_api(email:string) {
     await sleep(500);
 
@@ -27,13 +28,13 @@ export async function fetch_otp_api(email:string) {
             return response.json();
         })
         .then(data => {
-            console.log('Dữ liệu nhận được từ API:', data);
             if(data['code'] == 'error')
                 throw new Error(data['msg'])
             return data;
         })
 }
 
+//Call form client side
 export async function fetch_register_api(formData:any) {
     await sleep(500);    
     
@@ -45,7 +46,7 @@ export async function fetch_register_api(formData:any) {
         body: JSON.stringify({
             "email": formData['email'],
             "password": formData['password'],
-            "name": 'Guest',
+            "name": formData['name'],
             "phone": formData['phone'],
             "otp": formData['otp'].toString()
         })
@@ -66,12 +67,11 @@ export async function fetch_register_api(formData:any) {
                 throw new Error(data['msg'])
             }
 
-            console.log(data);
-
             return data
         })
 }
 
+//Call form client side
 export async function fetch_login(formData:any) {
     await sleep(1000);
 
@@ -105,29 +105,59 @@ export async function fetch_login(formData:any) {
     })
 }
 
-export async function fetch_account(token:string | null) {
-
+//Call form server side
+export async function fetch_account(token:string | null, userAgent:string) {    
     return fetch(`${url}/account`, {
+        method: 'GET', 
+        headers: {
+            'Content-Type': 'application/json',
+            'user-agent': userAgent,
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {
+
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
+    
+        // Kiểm tra nếu phản hồi có phải JSON không
+        return response.json();
+    })
+    .then(data => {
+        if(data['code'] !== 'success') {
+            throw new Error(data['msg'])
+        }
+
+        return data
+    })    
+}
+
+// Student
+export async function fetch_printer(token:string) {
+    return fetch(`${url}/printer`, {
         method: 'GET', 
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`, 
         },
     })
-        .then(response => {
-            if(!response.ok) {
-                return response.json().then(errorData => {
-                    throw new Error(errorData.message || 'Có lỗi xảy ra');
-                });
-            }
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {
 
-            return response.json()
-        })
-        .then(data => {
-            if(data['code'] !== 'success') {
-                throw new Error(data['code'])
-            }
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
     
-            return data
-        })
+        // Kiểm tra nếu phản hồi có phải JSON không
+        return response.json();
+    })
+    .then(data => {
+        return data
+    }) 
 }

@@ -1,28 +1,32 @@
-'use client'
+import { redirect } from "next/navigation";
+import { fetch_account } from "@/assessts/function/fetch";
+import { cookies, headers  } from "next/headers";
 
-import {useRouter} from "next/navigation";
-import {useEffect} from "react";
-import Cookies from 'js-cookie';
+export default async function NotFoundPage() {
+   let account = null
 
-export default function NotFoundPage() {
-    const router = useRouter();
+   try {
+      const headersList = headers();
+      const cookieStore = cookies();
+      const accessToken = cookieStore.get("token");
 
-    useEffect(() => {
-        const token = Cookies.get('token')
+      if(!accessToken)
+         throw new Error("Không có token")
 
-        console.log(token);
-        
+      const token: string = accessToken.value; 
+      
+      if(!headersList.get('user-agent'))
+         throw new Error("Không có user-agent")
 
-        if(token)
-            router.push("/student/")
+      //@ts-ignore
+      account = await fetch_account(token, headersList.get('user-agent'));          
+   } catch(err) {
+      //@ts-ignore
+      console.log("err: ", err.message);
+      redirect('/login');
+   }
 
-        router.push("/auth/login")
-    }, [router]);
-
-    return (
-        <div className="container my-5 text-center">
-            {/* <h1 className="display-4">404 - Không tìm thấy trang</h1>
-            <p>Trang bạn tìm không tồn tại. Bạn sẽ được chuyển hướng về trang chủ trong ít giây...</p> */}
-        </div>
-    );
+   if(account['account']['role'] === 'student') {
+      redirect('/student');
+   }
 };

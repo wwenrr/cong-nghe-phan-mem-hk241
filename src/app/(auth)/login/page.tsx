@@ -51,7 +51,6 @@ export default function Page() {
                 <Container component="main" maxWidth="xs">
                     <Box
                         sx={{
-                            marginTop: 8,
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
@@ -140,7 +139,7 @@ export default function Page() {
                             
                             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
                                 <Typography variant="body2" sx={{ fontSize: '1.2rem' }}>
-                                    <Link href="/auth/register">
+                                    <Link href="/register">
                                         Chưa có tài khoản? Đăng ký
                                     </Link>
                                 </Typography>

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import {Roboto } from '@next/font/google'
 import React from "react";
+import { redirect } from "next/navigation";
+import { cookies, headers } from "next/headers";
+import { fetch_account } from "@/assessts/function/fetch";
 
 export const metadata: Metadata = {
     title: "Trang chủ",
@@ -17,7 +20,7 @@ const roboto = Roboto({
     weight: ['400', '700']
 })
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
         <head>

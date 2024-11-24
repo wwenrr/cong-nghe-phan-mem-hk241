@@ -8,7 +8,7 @@ import {Path} from "@/assessts/components/path";
 import React, { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 import { fetch_account } from "@/assessts/function/fetch";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 const cta_logo = [
   {
@@ -34,26 +34,23 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const router = useRouter()
-  // const [mounted, setMounted] = useState(false)
-
-  // useEffect(() => {
-  //       const token = Cookies.get('token')
-        
-  //       if(!token)
-  //         window.location.href = '/';
-  //       else {
-  //         setMounted(true)
-  //       }
-        
-  //   }, [router]);  
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get("token");
-  const token = accessToken ? accessToken.value : '';
-
   try {
-    const account = await fetch_account(token);
+    const headersList = headers();
+    const cookieStore = cookies();
+    const accessToken = cookieStore.get("token");
+    
+    if(!accessToken)
+        throw new Error("Err")
 
+    const token: string = accessToken.value; 
+    
+    if(!headersList.get('user-agent'))
+        throw new Error("Err")
+
+    //@ts-ignore
+    const account = await fetch_account(token, headersList.get('user-agent'));
+    
+    
     if(account['account']['role'] === 'student')
       return (
         <>
@@ -64,7 +61,7 @@ export default async function RootLayout({
 
             <main>
               <header>
-                <Header token={token}/>
+                <Header/>
               </header>
 
               <section>
@@ -99,8 +96,6 @@ export default async function RootLayout({
       
   } catch (error) {
     //@ts-ignore
-    console.log(error.message);
-    
     redirect('/');
   }
 }

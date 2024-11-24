@@ -1,6 +1,26 @@
 .layout {
     flex-grow: 1;
-    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
     // background-color: RED;
     
+    &::-webkit-scrollbar {
+        width: 7px;         
+        padding-left: 10px;
+        padding-right: 10px;
+        cursor: pointer;     
+    }
+      
+    &::-webkit-scrollbar-thumb {
+        background-color: #E6EBF3;    
+        border-radius: 20px;       
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        padding-left: 10px;
+        padding-right: 10px;
+        background-color: gray;   
+        border-radius: 20px;     
+        cursor: pointer;    
+    }
 }

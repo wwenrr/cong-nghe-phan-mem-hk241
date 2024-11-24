@@ -106,6 +106,7 @@ function Register({err, setErr, OtpSent, setOtpSent, email}) {
     const passwordRef = useRef<HTMLInputElement>(null);
     const phoneRef = useRef<HTMLInputElement>(null);
     const otpRef = useRef<HTMLInputElement>(null);
+    const nameRef = useRef<HTMLInputElement>(null);
 
     const router = useRouter();
 
@@ -123,6 +124,7 @@ function Register({err, setErr, OtpSent, setOtpSent, email}) {
             password: passwordRef.current?.value || '',
             phone: phoneRef.current?.value || '',
             otp: otpRef.current?.value || '',
+            name: nameRef.current?.value || ''
         };
 
         try {
@@ -153,7 +155,7 @@ function Register({err, setErr, OtpSent, setOtpSent, email}) {
                     display: 'flex',
                     flexDirection: 'column',
                     width: 370,
-                    alignItems: 'center'
+                    alignItems: 'center',
                 }}>
                     <ArrowBackIosNewIcon 
                         sx={{
@@ -188,6 +190,29 @@ function Register({err, setErr, OtpSent, setOtpSent, email}) {
                                     backgroundColor: '#f0f0f0',
                                 },
                                 width: 250
+                            }}
+                />
+
+                <TextField id="outlined-basicq34"
+                            label="Họ Tên"
+                            variant="standard"
+                            type="text"
+                            autoComplete="current-password"
+                            inputRef={nameRef}
+                            required
+                            disabled={loading}
+                            sx={{
+                                '& .MuiInputBase-root': {
+                                    fontSize: '1.5rem',
+                                },
+                                '& .MuiInputLabel-root': {
+                                    fontSize: '1.5rem',
+                                },
+                                '& .MuiInputBase-root.Mui-disabled': {
+                                    backgroundColor: '#f0f0f0',
+                                },
+                                width: 250,
+                                mt: 2
                             }}
                 />
 
@@ -264,7 +289,6 @@ function Register({err, setErr, OtpSent, setOtpSent, email}) {
                 {loading ?
                     <Button variant="contained"
                             sx = {{
-                                ml: 2,
                                 fontSize: '1.3rem',
                                 height: 40,
                                 marginTop: 1.5
@@ -274,7 +298,6 @@ function Register({err, setErr, OtpSent, setOtpSent, email}) {
                     :
                     <Button variant="contained"
                             sx = {{
-                                ml: 2,
                                 fontSize: '1.3rem',
                                 height: 40,
                                 marginTop: 1.5
@@ -305,7 +328,6 @@ export default function Page() {
                 <Container component="main" maxWidth="xs">
                     <Box
                         sx={{
-                            marginTop: OtpSent? 0 : 7,
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
@@ -313,8 +335,8 @@ export default function Page() {
                             borderRadius: 2,
                             boxShadow: 3,
                             backgroundColor: 'background.paper',
-                            height: OtpSent ? 580 : 400,
-                            justifyContent: 'flex-start',
+                            height: OtpSent ? 640 : 400,
+                            justifyContent: 'center',
                             position: 'relative'
                         }}
                     >
@@ -338,25 +360,15 @@ export default function Page() {
                             marginTop: 3,
                             fontSize: '1.3rem'
                         }}>
-                            <Link href="/auth/login">
+                            <Link href="/login">
                                 Đã có tài khoản ? Đăng nhập
                             </Link>
-
-                            {/* <Typography sx={{
-                                marginTop: 0.5,
-                                fontSize: '1.3rem',
-                                cursor: 'pointer'
-                            }}>
-                                Đã gửi Otp ? Tạo tài khoản
-                            </Typography> */}
                         </Typography>}
 
                         {err.length > 0 && <Alert severity="error" color="error"
                                 variant="outlined"
                                 sx={{
-                                    // border: 'none',
                                     marginTop: 3,
-                                    // bgcolor: 'background.paper',
                                     fontSize: '1.3rem',
                                 }}
                         >
