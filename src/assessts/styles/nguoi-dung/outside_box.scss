@@ -1,0 +1,25 @@
+.outside_box {
+    padding: 20px 50px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    background: linear-gradient(to bottom, #FFF8E8, #F7EED3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    span {
+        margin-top: 30px;
+        font-size: 3rem;
+        color: #54473F;
+
+        span {
+            color: #B6A28E;
+            font-size: 1.5rem;
+        }
+    }
+}

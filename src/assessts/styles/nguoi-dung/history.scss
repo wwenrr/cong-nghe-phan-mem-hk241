@@ -1,0 +1,26 @@
+.history {
+    background: radial-gradient(circle, #F4F6FF, #FCFAEE);
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 2px solid beige;
+    box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.3);
+
+    h1 {
+        color: #CDC2A5;
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+
+    .content {
+        flex-grow: 1;
+        overflow-y: auto;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+        margin-top: 20px;
+        background-color: #FCFAEE;
+        padding: 10px 5px;
+        width: 100%;
+        border-radius: 7px;
+    }
+}

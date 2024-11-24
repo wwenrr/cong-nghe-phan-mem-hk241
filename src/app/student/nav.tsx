@@ -25,7 +25,7 @@ const menu = [
     },
     {
         logo: "https://cdn-icons-png.flaticon.com/128/1177/1177568.png",
-        describe: "Người Dùng",
+        describe: "Tài Khoản",
         url: "/student/nguoi-dung"
     },
     {

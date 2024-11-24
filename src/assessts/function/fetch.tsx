@@ -237,3 +237,86 @@ export async function delete_file(token:string, id:string) {
         return data
     }) 
 }
+
+export async function get_wallet(token:string) {
+    return fetch(`${url}/e-wallet`, {
+        method: 'GET', 
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {
+
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
+    
+        // Kiểm tra nếu phản hồi có phải JSON không
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        return data
+    }) 
+}
+
+export async function get_history(token:string) {
+    return fetch(`${url}/history`, {
+        method: 'GET', 
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {
+
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
+    
+        // Kiểm tra nếu phản hồi có phải JSON không
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        return data
+    }) 
+}
+
+export async function donate_money(token:string, value:number) {
+    await sleep(3000);
+
+    return fetch(`${url}/e-wallet/change`, {
+        method: 'PATCH', 
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+        },
+        body: JSON.stringify({
+            'type': 'add',
+            'value': value
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {
+
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
+    
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        return data
+    }) 
+}

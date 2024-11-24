@@ -50,8 +50,6 @@ export default async function RootLayout({
     //@ts-ignore
     const account = await fetch_account(token, headersList.get('user-agent'));
     
-    console.log(account);
-    
     if(account['account']['role'] === 'student')
       return (
         <>

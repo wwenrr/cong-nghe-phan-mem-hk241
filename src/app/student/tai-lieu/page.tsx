@@ -9,6 +9,8 @@ import { redirect } from "next/navigation";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import { Snackbar, Alert } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 //@ts-ignore
 function Addfile({setOpen, addFile}) {
@@ -120,14 +122,49 @@ export default function() {
     
     const columns = [
         { field: "_id",
-            headerName: "Hành động",
-            width: 190,
+            headerName: "Xem File",
+            width: 120,
             //@ts-ignore
             renderCell: (params) => {
                 return (
                     <>
                         <Button
-                            variant="contained"
+                            variant="outlined"
+                            color="primary"
+                            component="a"
+                            href={params.row.link}  
+                            target="_blank"  
+                            sx={{ 
+                                fontSize: '1.1rem',
+                                width: '2px'
+                            }}
+                        >
+                            <VisibilityIcon />
+                        </Button>
+                    </>
+                )
+              },
+            sortable: false
+        },
+        { field: "link",
+            headerName: "Xem file",
+            width: 90,
+            //@ts-ignore
+        },
+        { field: "pages", headerName: "Số Trang", width: 90, sortable: true },
+        { field: "name", headerName: "Tên File", width: 350, sortable: false },
+        { field: "createdAt", headerName: "Ngày Upload", width: 200, sortable: false },
+        {
+            field: "__v",
+            headerName: "",
+            width: 110,
+            sortable: false,
+            //@ts-ignore
+            renderCell: (params) => {
+                return (
+                    <>
+                        <Button
+                            variant="text"
                             color="error"
                             onClick={async () => {
                                 try {
@@ -145,33 +182,14 @@ export default function() {
                                     setOpen(e.message)
                                 }
                             }}
-                            sx={{ fontSize: '1.1rem' }}
+                            sx={{ fontSize: '1.1rem', width: 5}}
                         >
-                            Xóa
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            component="a"
-                            href={params.row.link}  
-                            target="_blank"  
-                            sx={{ fontSize: '1.1rem', ml: 2}}
-                        >
-                            Xem File
+                            <CloseIcon />
                         </Button>
                     </>
                 )
-              },
-            sortable: false
-        },
-        { field: "link",
-            headerName: "Xem file",
-            width: 90,
-            //@ts-ignore
-        },
-        { field: "pages", headerName: "Số Trang", width: 90, sortable: true },
-        { field: "name", headerName: "Tên File", width: 350, sortable: false },
-        { field: "createdAt", headerName: "Ngày Upload", width: 220, sortable: false },
+            }
+        }
     ];
 
     useEffect(() => {
@@ -191,6 +209,7 @@ export default function() {
             <Snackbar
                 open={open.length !== 0}
                 autoHideDuration={1000}
+                onClose={() => setOpen('')}
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
                 sx={{
                     marginTop: "100px", 

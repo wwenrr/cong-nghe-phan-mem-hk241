@@ -9,6 +9,7 @@ import {useRouter } from "next/navigation";
 import { DataGrid } from '@mui/x-data-grid';
 import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Hidden, TextField, Typography } from '@mui/material';
 import PrintTwoToneIcon from '@mui/icons-material/PrintTwoTone';
+import PrintIcon from '@mui/icons-material/Print';
 
 //@ts-ignore
 function Content({printer}) {
@@ -87,8 +88,8 @@ export default function() {
       };
 
     const columns = [
-        { field: "status",
-            headerName: "Trạng thái",
+          { field: "status",
+            headerName: "",
             width: 90,
             //@ts-ignore
             renderCell: (params) => {
@@ -105,7 +106,7 @@ export default function() {
                     }
                     onClick={() => handleOpenDialog(params.row._id)}
                     >
-                    In
+                      <PrintIcon />
                 </button>;
               }
               return <button style={{ backgroundColor: 'gray', color: 'white', border: 'none', padding: '5px 10px', borderRadius: '5px', cursor: 'pointer' }}>Inactive</button>;
@@ -183,7 +184,7 @@ export default function() {
                       sx={{
                           width: "100%",
                           height: "100%",
-                          backgroundColor: "#F1F0E8", 
+                          background: 'linear-gradient(135deg, #fff, #F1F0E8)', 
                           overflow: "hidden",
                           "& .MuiDataGrid-columnHeaders": {
                               // backgroundColor: "#00796b", 
