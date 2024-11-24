@@ -164,45 +164,45 @@ export default function() {
                 </Button>
                 </DialogActions>
             </Dialog>
-                <DataGrid
-                        rows={printerData.map((item) => ({
-                            //@ts-ignore
-                            ...item,
-                            //@ts-ignore
-                            id: item._id, 
-                        }))}
-                        columnVisibilityModel={{
-                            _id : false
-                          }}
-                        columns={columns}
-                        //@ts-ignore
-                        pageSize={3}
-                        rowsPerPageOptions={[5, 10, 20]}
-                        disableSelectionOnClick
-                        loading={printerData.length === 0}
-                        sx={{
-                            width: "100%",
-                            height: "100%",
-                            backgroundColor: "#F1F0E8", 
-                            overflow: "hidden",
-                            "& .MuiDataGrid-columnHeaders": {
-                                // backgroundColor: "#00796b", 
-                                // color: "#0a638f", 
-                                fontSize: "1.4rem", 
-                                fontWeight: "bold",
-                            },
-                            "& .MuiDataGrid-cell": {
-                                // backgroundColor: "#8ddde9",
-                                fontSize: "1.4rem", 
-                            },
-                            "& .MuiDataGrid-virtualScroller::-webkit-scrollbar": {
-                                display: "none",
-                            },
-                            "& .MuiDataGrid-root": {
-                                overflowX: "hidden", 
-                            },
+              <DataGrid
+                      rows={printerData.map((item) => ({
+                          //@ts-ignore
+                          ...item,
+                          //@ts-ignore
+                          id: item._id, 
+                      }))}
+                      columnVisibilityModel={{
+                          _id : false
                         }}
-                    />
+                      columns={columns}
+                      //@ts-ignore
+                      pageSize={3}
+                      rowsPerPageOptions={[5, 10, 20]}
+                      disableSelectionOnClick
+                      loading={printerData.length === 0}
+                      sx={{
+                          width: "100%",
+                          height: "100%",
+                          backgroundColor: "#F1F0E8", 
+                          overflow: "hidden",
+                          "& .MuiDataGrid-columnHeaders": {
+                              // backgroundColor: "#00796b", 
+                              // color: "#0a638f", 
+                              fontSize: "1.4rem", 
+                              fontWeight: "bold",
+                          },
+                          "& .MuiDataGrid-cell": {
+                              // backgroundColor: "#8ddde9",
+                              fontSize: "1.4rem", 
+                          },
+                          "& .MuiDataGrid-virtualScroller::-webkit-scrollbar": {
+                              display: "none",
+                          },
+                          "& .MuiDataGrid-root": {
+                              overflowX: "hidden", 
+                          },
+                      }}
+                  />
             </div>
         </>
     )

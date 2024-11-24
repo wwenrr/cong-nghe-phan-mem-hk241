@@ -161,3 +161,79 @@ export async function fetch_printer(token:string) {
         return data
     }) 
 }
+
+export async function fetch_file_list(token:string) {
+    return fetch(`${url}/file`, {
+        method: 'GET', 
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {
+
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
+    
+        // Kiểm tra nếu phản hồi có phải JSON không
+        return response.json();
+    })
+    .then(data => {
+        return data
+    }) 
+}
+
+export async function upload_file(token:string, formdata:FormData) {
+    return fetch(`${url}/file`, {
+        method: 'POST', 
+        body: formdata,
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {
+
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
+    
+        // Kiểm tra nếu phản hồi có phải JSON không
+        return response.json();
+    })
+    .then(data => {
+        return data
+    }) 
+}
+
+export async function delete_file(token:string, id:string) {
+    return fetch(`${url}/file/${id}`, {
+        method: 'DELETE', 
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {
+
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
+    
+        // Kiểm tra nếu phản hồi có phải JSON không
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        return data
+    }) 
+}
