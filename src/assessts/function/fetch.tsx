@@ -46,7 +46,7 @@ export async function fetch_register_api(formData:any) {
         body: JSON.stringify({
             "email": formData['email'],
             "password": formData['password'],
-            "name": 'Guest',
+            "name": formData['name'],
             "phone": formData['phone'],
             "otp": formData['otp'].toString()
         })
@@ -134,4 +134,30 @@ export async function fetch_account(token:string | null, userAgent:string) {
 
         return data
     })    
+}
+
+// Student
+export async function fetch_printer(token:string) {
+    return fetch(`${url}/printer`, {
+        method: 'GET', 
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {
+
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
+    
+        // Kiểm tra nếu phản hồi có phải JSON không
+        return response.json();
+    })
+    .then(data => {
+        return data
+    }) 
 }

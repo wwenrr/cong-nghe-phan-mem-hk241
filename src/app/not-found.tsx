@@ -11,19 +11,19 @@ export default async function NotFoundPage() {
       const accessToken = cookieStore.get("token");
 
       if(!accessToken)
-         throw new Error("Err")
+         throw new Error("Không có token")
 
       const token: string = accessToken.value; 
       
       if(!headersList.get('user-agent'))
-         throw new Error("Err")
+         throw new Error("Không có user-agent")
 
       //@ts-ignore
       account = await fetch_account(token, headersList.get('user-agent'));          
    } catch(err) {
       //@ts-ignore
       console.log("err: ", err.message);
-      redirect('/auth/login');
+      redirect('/login');
    }
 
    if(account['account']['role'] === 'student') {

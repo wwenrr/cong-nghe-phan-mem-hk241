@@ -1,4 +1,3 @@
-import React from "react";
 import '@styles/header.scss'
 import Logout from "@/assessts/components/Logout";
 
