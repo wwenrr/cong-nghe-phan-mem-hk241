@@ -119,6 +119,13 @@ export default function() {
         }
 
         foo();
+
+        useEffect(() => {
+            const interval = setInterval(() => {
+                foo()
+            }, 5000);
+        
+            return () => clearInterval(interval);
     }, [])
 
     return(
