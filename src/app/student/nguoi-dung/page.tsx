@@ -10,9 +10,9 @@ import { Select, MenuItem, Typography, Box } from "@mui/material";
 import { Button, Popover, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 function Price() {
-    const [selectedPrice, setSelectedPrice] = useState(null);
+    const [selectedPrice, setSelectedPrice] = useState(10000);
     const [anchorEl, setAnchorEl] = useState(null);
-    const [img, setImg] = useState('')
+    const [img, setImg] = useState('10000')
 
     const prices = [10000, 20000, 30000, 50000, 70000, 100000];
 
@@ -44,10 +44,10 @@ function Price() {
             <div>
             {/* Nút để mở dropdown */}
             <Button aria-describedby={id} variant="outlined" onClick={handleClick}>
-                {selectedPrice ? 
+                {
                 //@ts-ignore
                 `${selectedPrice.toLocaleString()} VND` 
-                : 'Chọn giá trị'}
+                }
             </Button>
             
             {/* Popover dropdown */}
