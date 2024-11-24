@@ -25,16 +25,18 @@ export default function Foo() {
 
         async function foo() {
             //@ts-ignore
+            console.log(parseInt(money, 10));
+
+            //@ts-ignore
             const result = await donate_money(token, parseInt(money, 10));
 
-            console.log(result);
             setLoading(false)
 
             await sleep(3000);
         }
 
         foo()
-    }, [searchParams]);
+    }, []);
 
     if(searchParams.get('money')) {
         if(loading)
