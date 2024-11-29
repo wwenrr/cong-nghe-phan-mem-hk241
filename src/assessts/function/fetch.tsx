@@ -320,3 +320,64 @@ export async function donate_money(token:string, value:number) {
         return data
     }) 
 }
+
+export async function print_file(token:string, printer_id:string, file_id:string) {
+    await sleep(1000);
+
+    return fetch(`${url}/printer`, {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+        },
+        body: JSON.stringify({
+            "printerId": printer_id,
+            "fileId": file_id
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {
+
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
+    
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        return data
+    }) 
+}
+
+export async function buy_paper(token:string, papers:number) {
+    await sleep(1000);
+
+    return fetch(`${url}/e-wallet/buy`, {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+        },
+        body: JSON.stringify({
+            "balancePaper": papers
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {
+
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
+    
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        return data
+    }) 
+}

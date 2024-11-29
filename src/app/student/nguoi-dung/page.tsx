@@ -4,10 +4,10 @@ import React, { useEffect, useState } from "react";
 import { Path } from "@/assessts/components/path";
 import Cookies from 'js-cookie';
 import { redirect } from "next/navigation";
-import { get_history, get_wallet } from "@/assessts/function/fetch";
+import { buy_paper, get_history, get_wallet } from "@/assessts/function/fetch";
 import style from "@styles/nguoi-dung.module.scss"
-import { Select, MenuItem, Typography, Box } from "@mui/material";
 import { Button, Popover, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { Alert, Avatar, Box, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Hidden, InputLabel, MenuItem, Select, SelectChangeEvent, Snackbar, TextField, Typography } from '@mui/material';
 
 function Price() {
     const [selectedPrice, setSelectedPrice] = useState(10000);
@@ -94,6 +94,17 @@ export default function() {
     const [selectedId, setSelectedId] = useState("");
     let price = [10000, 20000, 30000, 50000, 70000, 100000]
 
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const handleOpenDialog = () => {
+        setOpenDialog(true);
+      };
+    
+      // Đóng Dialog
+      const handleCloseDialog = () => {
+        setOpenDialog(false);
+      };
+
     //@ts-ignore
     const handleChange = (event) => {
         setSelectedId(event.target.value);
@@ -127,8 +138,97 @@ export default function() {
         return () => clearInterval(interval);
     }, [])
 
+    const [pageNumber, setPageNumber] = useState('');
+    const [loading, setLoading] = useState(false)
+    const [open, setOpen] = useState('');
+
+    const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        setOpen('');
+    };
+
+    const handlePageNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPageNumber(event.target.value);
+      };
+
+    const handleBuying = async () => {
+        const token = Cookies.get('token')
+        let result
+
+        setLoading(true)
+
+        console.log(parseInt(pageNumber, 10));
+
+        if(token)
+            result = await buy_paper(token, parseInt(pageNumber, 10))
+        else 
+            redirect('/')
+
+        console.log(result);
+        setLoading(false)
+        setOpen(result['msg'] ?? "Fail to fetch")
+        handleCloseDialog()
+    }
+
     return(
         <>
+            <Snackbar
+                  open={open.length !== 0}
+                  autoHideDuration={1000}
+                  onClose={() => setOpen('')}
+                  anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                  sx={{
+                      marginTop: "10px", 
+                  }}
+              >
+                  <Alert
+                      onClose={handleClose}
+                      severity="info"
+                      sx={{
+                          backgroundColor: "#f1f1f1", 
+                          color: "#000", 
+                          fontSize: "1.4rem", 
+                          border: "3px solid #ccc", 
+                          borderRadius: "8px", 
+                          padding: "10px 20px", 
+                          fontWeight: "bold"
+                      }}
+                  >
+                      {open}
+                  </Alert>
+              </Snackbar>
+            <Dialog open={openDialog} onClose={handleCloseDialog}>
+                <DialogTitle>Chọn Số Trang In Để Mua</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        disabled={loading}
+                        sx={{
+                            mt:2
+                        }}
+                        label="Số Trang"
+                        type="number" // Đảm bảo nhập số
+                        value={pageNumber}
+                        onChange={handlePageNumberChange}
+                        fullWidth
+                    />
+
+                    <Button 
+                        disabled={loading}
+                        variant="outlined"
+                        onClick={() => handleBuying()}
+                        sx={{
+                            mt:2,
+                        }}
+                    >Mua</Button>
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={handleCloseDialog} color="secondary">
+                    Đóng
+                </Button>
+                </DialogActions>
+            </Dialog>
             {price && wallet && <div className={style.layout}>
                 <div className={style.outside_box}>
                     <h1>Số Dư Hiện Tại:</h1>
@@ -138,6 +238,15 @@ export default function() {
                         wallet['balance'].toLocaleString('vi-VN')}
                         <span>vnđ</span>
                     </span>
+
+                    <h1>Số Trang In Còn Lại: {wallet['balancePaper']}</h1>
+
+                    <Button variant="contained"
+                        onClick={() => handleOpenDialog()}
+                        sx={{
+                            mt: 2
+                        }}
+                    >Mua Thêm Giấy In</Button>
                 </div>
 
                 <div className={style.sec_box}>

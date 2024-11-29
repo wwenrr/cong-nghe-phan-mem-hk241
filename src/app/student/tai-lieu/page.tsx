@@ -231,7 +231,7 @@ export default function() {
                     {open}
                 </Alert>
             </Snackbar>
-            {fileList.length !== 0 && <Addfile setOpen={setOpen} addFile={getFile}/>}
+            <Addfile setOpen={setOpen} addFile={getFile}/>
             <DataGrid
                 columnVisibilityModel={{
                     link : false
@@ -247,7 +247,6 @@ export default function() {
                 pageSize={3}
                 rowsPerPageOptions={[5, 10, 20]}
                 disableSelectionOnClick
-                loading={fileList.length === 0}
                 sx={{
                     width: "100%",
                     height: "100%",

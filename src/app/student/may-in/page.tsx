@@ -3,69 +3,105 @@
 import React, { useEffect, useState } from "react";
 import { Path } from "@/assessts/components/path";
 import style from "@styles/may-in.module.scss"
-import { fetch_printer } from "@/assessts/function/fetch";
+import { fetch_file_list, fetch_printer, print_file } from "@/assessts/function/fetch";
 import Cookies from 'js-cookie';
-import {useRouter } from "next/navigation";
+import {redirect, useRouter } from "next/navigation";
 import { DataGrid } from '@mui/x-data-grid';
-import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Hidden, TextField, Typography } from '@mui/material';
+import { Alert, Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Hidden, InputLabel, MenuItem, Select, SelectChangeEvent, Snackbar, TextField, Typography } from '@mui/material';
 import PrintTwoToneIcon from '@mui/icons-material/PrintTwoTone';
 import PrintIcon from '@mui/icons-material/Print';
 
 //@ts-ignore
-function Content({printer}) {
-    console.log(printer);
+function Content({printer, setOpen, handleCloseDialog}) {
+  const [file, setFile] = useState([])
+  const [selectFile, setSelectFile] = useState('')
+
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    async function foo() {
+      const token = Cookies.get('token')
+      let file
+
+      if(token)
+        file = await fetch_file_list(token)
+
+      setFile(file['files'])
+    }
+
+    foo()
+  }, [])
+
+  const onFetching = async () => {
+    const token = Cookies.get('token')
+    const printer_id = printer['_id'];
+    const file_id = selectFile;
+    let msg
+
+    console.log("printer_id: ", printer_id);
     
-  return (
-    <>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          padding: 7,
-          borderRadius: 2,
-          boxShadow: 3,
-          backgroundColor: 'background.paper',
-          maxWidth: 400,
-          margin: 'auto',
-        }}
-      >
-        <Avatar sx={{ m: 1, bgcolor: 'grey', width: 75, height: 75, textAlign: 'center' }}>
-          <PrintTwoToneIcon fontSize="large" />
-        </Avatar>
 
-        <Typography component="h1" variant="h5" sx={{ fontWeight: 'bold', mb: 2, fontSize: '1.5rem' }}>
-          Thông Tin Máy In
-        </Typography>
+    setLoading(true)
 
-        {/* Hiển thị các thông tin của máy in */}
-        <Typography variant="body1" sx={{ mb: 1, fontSize: '1.5rem' }}>
-          <strong>Thương hiệu:</strong> {printer.brand}
-        </Typography>
-        <Typography variant="body1" sx={{ mb: 1, fontSize: '1.5rem' }}>
-          <strong>Model:</strong> {printer.model}
-        </Typography>
-        <Typography variant="body1" sx={{ mb: 1, fontSize: '1.5rem' }}>
-          <strong>Mô tả:</strong> {printer.description}
-        </Typography>
-        <Typography variant="body1" sx={{ mb: 1, fontSize: '1.5rem' }}>
-          <strong>Vị trí:</strong> {printer.location}
-        </Typography>
-        <Typography variant="body1" sx={{ mb: 1, fontSize: '1.5rem' }}>
-          <strong>Giá:</strong> {printer.price} VNĐ
-        </Typography>
-        <Typography variant="body1" sx={{ mb: 1, fontSize: '1.5rem' }}>
-          <strong>Trạng thái:</strong> {printer.status}
-        </Typography>
-        <Typography variant="body1" sx={{ mb: 1, fontSize: '1.5rem' }}>
-          <strong>Giảm giá:</strong> {printer.discountpercent}%
-        </Typography>
-        <Typography variant="body1" sx={{ mb: 1, fontSize: '1.5rem' }}>
-          <strong>Cơ sở:</strong> {printer.cs}
-        </Typography>
-      </Box>
-    </>
-  );
+    if(token)
+      msg = await print_file(token, printer_id, file_id);
+    else
+      redirect("/")
+
+    setLoading(false)
+
+    //@ts-ignore
+    setOpen(msg['msg'])
+    handleCloseDialog()
+  }
+
+  if(file)
+    return (
+      <>
+          <FormControl fullWidth disabled={loading}
+            sx={{
+              mt:2
+            }}
+          >
+            <InputLabel id="demo-simple-select-label">File</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              //@ts-ignore
+              value={selectFile ?? ''}
+              label="File"
+              onChange={(event: SelectChangeEvent) => {
+                console.log(selectFile);
+              
+                setSelectFile(event.target.value);
+              }}
+            >
+              {
+                file.map((item, index) => (
+                  //@ts-ignore
+                  <MenuItem value={item._id} key={item._id}>{item.name}</MenuItem>
+                ))
+              }
+            </Select>
+          </FormControl>
+
+          <Button
+            variant="contained"
+            disabled={loading}
+            onClick={onFetching}
+            sx={{
+              mt: 2
+            }}
+          >Xác Nhận In File Này</Button>
+      </>
+    );
+
+  else
+    return (
+        <>
+          Danh sách file trống
+        </>
+    )
 }
 
 
@@ -115,12 +151,9 @@ export default function() {
         },
         { field: "cs", headerName: "Cơ sở", width: 60, sortable: false },
         { field: "brand", headerName: "Thương hiệu", width: 100, sortable: false },
-        { field: "model", headerName: "Model", width: 150, sortable: false },
-        // { field: "description", headerName: "Mô tả", width: 300 },
-        { field: "location", headerName: "Vị trí", width: 180,sortable: false },
-        { field: "price", headerName: "Giá (VNĐ)", width: 120 },
-        { field: "discountpercent", headerName: "Giảm giá (%)", width: 120 },
-        // { field: "updatedAt", headerName: "Cập nhật lần cuối", width: 200 },
+        { field: "description", headerName: "Mô Tả", width: 320,  sortable: false},
+        { field: "location", headerName: "Vị Trí", width: 190, sortable: false },
+        { field: "type", headerName: "Loại giấy", width: 100 },
         { field: "_id", headerName: "ID", hideable: true},
     ];
 
@@ -151,20 +184,59 @@ export default function() {
         // return () => clearInterval(intervalId);
     }, [])
 
+    const [open, setOpen] = useState('');
+
+    const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        setOpen('');
+    };
+
     return (
         <>
             <div className={style.layout}>
-            <Dialog open={openDialog} onClose={handleCloseDialog}>
-                <Content printer={
-                  //@ts-ignore
-                  printerData.find(printer  => printer._id == selectedRow)}
-                />
-                <DialogActions>
-                <Button onClick={handleCloseDialog} color="secondary">
-                    Đóng
-                </Button>
-                </DialogActions>
-            </Dialog>
+              <Snackbar
+                  open={open.length !== 0}
+                  autoHideDuration={1000}
+                  onClose={() => setOpen('')}
+                  anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                  sx={{
+                      marginTop: "10px", 
+                  }}
+              >
+                  <Alert
+                      onClose={handleClose}
+                      severity="info"
+                      sx={{
+                          backgroundColor: "#f1f1f1", 
+                          color: "#000", 
+                          fontSize: "1.4rem", 
+                          border: "3px solid #ccc", 
+                          borderRadius: "8px", 
+                          padding: "10px 20px", 
+                          fontWeight: "bold"
+                      }}
+                  >
+                      {open}
+                  </Alert>
+              </Snackbar>
+              <Dialog open={openDialog} onClose={handleCloseDialog}>
+                  <DialogTitle>Chọn File để In</DialogTitle>
+                  <DialogContent>
+                    <Content printer={
+                      //@ts-ignore
+                      printerData.find(printer  => printer._id == selectedRow)}
+                      setOpen={setOpen}
+                      handleCloseDialog={handleCloseDialog}
+                    />
+                  </DialogContent>
+                  <DialogActions>
+                  <Button onClick={handleCloseDialog} color="secondary">
+                      Đóng
+                  </Button>
+                  </DialogActions>
+              </Dialog>
               <DataGrid
                       rows={printerData.map((item) => ({
                           //@ts-ignore
