@@ -268,7 +268,7 @@ export default function() {
                                     }}
                                 >
                                     <MenuItem value="">
-                                        <em>Chọn một mục</em>
+                                        <em>Lịch Sử In</em>
                                     </MenuItem>
                                     {   
                                         //@ts-ignore

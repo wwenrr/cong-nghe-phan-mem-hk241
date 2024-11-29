@@ -52,7 +52,7 @@ function Content({printer, setOpen, handleCloseDialog}) {
 
     //@ts-ignore
     setOpen(msg['msg'])
-    handleCloseDialog()
+    // handleCloseDialog()
   }
 
   if(file)
