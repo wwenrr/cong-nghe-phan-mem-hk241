@@ -7,7 +7,7 @@ import Cookies from 'js-cookie';
 import { delete_file, fetch_file_list, upload_file } from "@/assessts/function/fetch";
 import { redirect } from "next/navigation";
 import { DataGrid } from "@mui/x-data-grid";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
 import { Snackbar, Alert } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -95,7 +95,60 @@ function Addfile({setOpen, addFile}) {
     )
 }
 
+function DialogComp({openDialog, setOpenDialog, link}:any) {
+    const [loading, setLoading] = useState(false)
+
+    const handleOpenDialog = () => {
+        setOpenDialog(true);
+      };
+    
+      // Đóng Dialog
+      const handleCloseDialog = () => {
+        setOpenDialog(false);
+      };
+    return (
+        <>
+            <Dialog open={openDialog} onClose={handleCloseDialog}
+                sx={{
+                    padding: 5,
+                    overflow: 'hidden',
+                    height: '100vh'
+                }}
+                maxWidth="md"
+                fullWidth
+            >
+                <DialogTitle>Xem Tài Liệu</DialogTitle>
+                <DialogContent sx={{
+                    height: 1000,
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    overflow: 'hidden',
+                    alignItems: 'center'
+                }}>
+                    <iframe 
+                        src={`${link}/preview#zoom=50`} 
+                        style={{
+                            width: '100%', 
+                            height: '100%', 
+                            border: 'none',
+                        }} 
+                        allow="autoplay">
+                    </iframe>
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={handleCloseDialog} color="secondary">
+                    Đóng
+                </Button>
+                </DialogActions>
+            </Dialog>
+        </>
+    )
+}
+
 export default function() {
+    const [link, setLink] = useState('')
+    const [openDialog, setOpenDialog] = useState(false)
     const [fileList, setFile] = useState([])
     const [open, setOpen] = useState('');
 
@@ -132,7 +185,11 @@ export default function() {
                             variant="outlined"
                             color="primary"
                             component="a"
-                            href={params.row.link}  
+                            onClick={() => {
+                                    setOpenDialog(true)
+                                    setLink(params.row.link)
+                                }
+                            }
                             target="_blank"  
                             sx={{ 
                                 fontSize: '1.1rem',
@@ -206,6 +263,7 @@ export default function() {
     
     return (
         <>
+            <DialogComp  openDialog={openDialog} setOpenDialog={setOpenDialog} link={link}/>
             <Snackbar
                 open={open.length !== 0}
                 autoHideDuration={1000}
