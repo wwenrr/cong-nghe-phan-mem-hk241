@@ -17,11 +17,14 @@
 
 header {
     .title {
+        @import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&family=Lacquer&display=swap');
+        
         span {
             color: #033f6c;
+            font-weight: 700;
         }
-
-        font-family: 'Playfair Display', serif;
+        
+        font-family: "Jaro", sans-serif;
         display: flex;
         flex-direction: column;
         margin-right: auto;
