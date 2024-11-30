@@ -29,4 +29,8 @@ export default async function NotFoundPage() {
    if(account['account']['role'] === 'student') {
       redirect('/student');
    }
+
+   if(account['account']['role'] === 'manager') {
+      redirect('/manager');
+   }
 };

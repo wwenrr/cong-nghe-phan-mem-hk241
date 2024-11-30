@@ -381,3 +381,28 @@ export async function buy_paper(token:string, papers:number) {
         return data
     }) 
 }
+
+export async function get_info(token:string) {
+    return fetch(`${url}/account`, {
+        method: 'GET', 
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {
+
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
+    
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        return data
+    }) 
+}
