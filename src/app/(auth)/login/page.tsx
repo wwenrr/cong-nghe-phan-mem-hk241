@@ -37,7 +37,10 @@ export default function Page() {
             const res = await fetch_login(formData)
 
             Cookies.set('token', res['token'], { expires: 1 });
-            window.location.href = '/student';
+            if (res.role == 'manager'){
+                window.location.href = '/manager'
+            }
+            else window.location.href = '/student';
         } catch(error) {
             // @ts-ignore
             setErr(error.message)

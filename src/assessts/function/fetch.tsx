@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
 
 const url:string = 'https://cnpmbe.hcmutssps.id.vn/api'
+const url_manager:string = 'https://cnpmbe.hcmutssps.id.vn/manager/api'
 
 function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -139,6 +140,31 @@ export async function fetch_account(token:string | null, userAgent:string) {
 // Student
 export async function fetch_printer(token:string) {
     return fetch(`${url}/printer`, {
+        method: 'GET', 
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {
+
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
+    
+        // Kiểm tra nếu phản hồi có phải JSON không
+        return response.json();
+    })
+    .then(data => {
+        return data
+    }) 
+}
+
+export async function fetch_printer_detail(token:string, id: string) {
+    return fetch(`${url_manager}/printer/${id}`, {
         method: 'GET', 
         headers: {
             'Content-Type': 'application/json',
