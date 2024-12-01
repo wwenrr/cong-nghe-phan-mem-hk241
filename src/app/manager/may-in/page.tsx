@@ -29,7 +29,6 @@ function AddPrinter({setOpen}:any) {
 
     const [formData, setFormData] = useState({
         brand: "",
-        model: "",
         description: "",
         location: "",
         status: "active", 
@@ -72,23 +71,32 @@ function AddPrinter({setOpen}:any) {
       <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
         <DialogTitle>Thêm Máy In</DialogTitle>
         <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            label="Thương hiệu"
-            name="brand"
-            fullWidth
-            value={formData.brand}
-            onChange={handleChange}
-          />
-          <TextField
-            margin="dense"
-            label="Model"
-            name="model"
-            fullWidth
-            value={formData.model}
-            onChange={handleChange}
-          />
+            <FormControl fullWidth
+                sx={{
+                    mt:2
+                }}
+                disabled={loading}
+            >
+                <InputLabel id="paper-type">thương hiệu</InputLabel>
+                <Select
+                labelId="paper-type"
+                id="demo-simple-select"
+                value={formData.brand}
+                label="Thuộc tính"
+                onChange={handleChange}
+                name="brand"
+                >
+                    <MenuItem value={'Canon'}>Canon</MenuItem>
+                    <MenuItem value={'HP'}>HP </MenuItem>
+                    <MenuItem value={'Epson'}>Epson</MenuItem>
+                    <MenuItem value={'Brother'}>Brother</MenuItem>
+                    <MenuItem value={'Lexmark'}>Lexmark</MenuItem>
+                    <MenuItem value={'Ricoh'}>Ricoh</MenuItem>
+                    <MenuItem value={'Xerox'}>Xerox</MenuItem>
+                    <MenuItem value={'Samsung'}>Samsung</MenuItem>
+                </Select>
+            </FormControl>
+                
           <TextField
             margin="dense"
             label="Mô tả"
@@ -97,30 +105,94 @@ function AddPrinter({setOpen}:any) {
             value={formData.description}
             onChange={handleChange}
           />
-          <TextField
-            margin="dense"
-            label="Vị trí"
-            name="location"
-            fullWidth
-            value={formData.location}
-            onChange={handleChange}
-          />
-          <TextField
-            margin="dense"
-            label="Trạng thái"
-            name="status"
-            fullWidth
-            value={formData.status}
-            onChange={handleChange}
-          />
-          <TextField
-            margin="dense"
-            label="Loại giấy"
-            name="type"
-            fullWidth
-            value={formData.type}
-            onChange={handleChange}
-          />
+
+                <FormControl fullWidth
+                        sx={{
+                            mt:2
+                        }}
+                        disabled={loading}
+                    >
+                        <InputLabel id="paper-type">chọn sơ sở</InputLabel>
+                        <Select
+                        labelId="paper-type"
+                        id="demo-simple-select"
+                        value={formData.cs}
+                        label="Thuộc tính"
+                        name="cs"
+                        onChange={handleChange}
+                        >
+                            <MenuItem value={'1'}>1</MenuItem>
+                            <MenuItem value={'2'}>2</MenuItem>
+                        </Select>
+                    </FormControl>
+
+            <FormControl fullWidth
+                sx={{
+                    mt:2
+                }}
+                disabled={loading}
+            >
+                <InputLabel id="paper-type">chọn vị trí</InputLabel>
+                <Select
+                labelId="paper-type"
+                id="demo-simple-select"
+                value={formData.location}
+                label="Thuộc tính"
+                onChange={handleChange}
+                name="location"
+                >
+                    <MenuItem value={'Thư viện'}>Thư viện</MenuItem>
+                    <MenuItem value={'Khu vực hành lang khoa'}>Khu vực hành lang khoa</MenuItem>
+                    <MenuItem value={'Phòng hội trường'}>Phòng hội trường </MenuItem>
+                    <MenuItem value={'Khu vực ký túc xá sinh viên'}>Khu vực ký túc xá sinh viên</MenuItem>
+                    <MenuItem value={'Phòng sinh hoạt chung'}>Phòng sinh hoạt chung</MenuItem>
+                    <MenuItem value={'Quầy dịch vụ sinh viên'}>Quầy dịch vụ sinh viên</MenuItem>
+                    <MenuItem value={'Phòng máy tính công cộng'}>Phòng máy tính công cộng</MenuItem>
+                    <MenuItem value={'Sảnh chính của trường'}>Sảnh chính của trường</MenuItem>
+                    <MenuItem value={'Phòng học nhóm'}>Phòng học nhóm</MenuItem>
+                </Select>
+            </FormControl>
+          <FormControl fullWidth
+                sx={{
+                    mt:2
+                }}
+                disabled={loading}
+            >
+                <InputLabel id="paper-type">trạng thái</InputLabel>
+                <Select
+                labelId="paper-type"
+                id="demo-simple-select"
+                value={formData.status}
+                label="Thuộc tính"
+                onChange={handleChange}
+                name="status"
+                >
+                    <MenuItem value={'active'}>active</MenuItem>
+                    <MenuItem value={'inactive'}>inactive</MenuItem>
+                </Select>
+            </FormControl>
+          <FormControl fullWidth
+                sx={{
+                    mt:2
+                }}
+                disabled={loading}
+            >
+                <InputLabel id="paper-type">loại giấy</InputLabel>
+                <Select
+                labelId="paper-type"
+                id="demo-simple-select"
+                value={formData.type}
+                label="Thuộc tính"
+                onChange={handleChange}
+                name="type"
+                >
+                    <MenuItem value={'A0'}>A0</MenuItem>
+                    <MenuItem value={'A1'}>A1</MenuItem>
+                    <MenuItem value={'A2'}>A2</MenuItem>
+                    <MenuItem value={'A3'}>A3</MenuItem>
+                    <MenuItem value={'A4'}>A4</MenuItem>
+                </Select>
+            </FormControl>
         </DialogContent>
         <DialogActions>
           <Button
@@ -161,6 +233,170 @@ function EditPrinter({printer_id, setOpen}: any) {
         setOpenDialog(false);
     };
 
+    function EditPrinter() {
+        useEffect(() => {
+            console.log(select);
+        }, [])
+
+        if(select === 'type')
+            return(
+                <>
+                    <FormControl fullWidth
+                        disabled={loading}
+                        sx={{
+                            mt:2
+                        }}
+                    >
+                        <InputLabel id="paper-type">loại giấy</InputLabel>
+                        <Select
+                        labelId="paper-type"
+                        id="demo-simple-select"
+                        value={textFieldValue}
+                        label="Thuộc tính"
+                        onChange={(event: SelectChangeEvent) => {
+                            setTextFieldValue(event.target.value as string)
+                        }}
+                        >
+                            <MenuItem value={'A0'}>A0</MenuItem>
+                            <MenuItem value={'A1'}>A1</MenuItem>
+                            <MenuItem value={'A2'}>A2</MenuItem>
+                            <MenuItem value={'A3'}>A3</MenuItem>
+                            <MenuItem value={'A4'}>A4</MenuItem>
+                        </Select>
+                    </FormControl>
+                </>
+            )
+
+        if(select === 'brand')
+            return(
+                <>
+                    <FormControl fullWidth
+                        disabled={loading}
+                        sx={{
+                            mt:2
+                        }}
+                    >
+                        <InputLabel id="paper-type">thương hiệu</InputLabel>
+                        <Select
+                        labelId="paper-type"
+                        id="demo-simple-select"
+                        value={textFieldValue}
+                        label="Thuộc tính"
+                        onChange={(event: SelectChangeEvent) => {
+                            setTextFieldValue(event.target.value as string)
+                        }}
+                        >
+                            <MenuItem value={'Canon'}>Canon</MenuItem>
+                            <MenuItem value={'HP'}>HP </MenuItem>
+                            <MenuItem value={'Epson'}>Epson</MenuItem>
+                            <MenuItem value={'Brother'}>Brother</MenuItem>
+                            <MenuItem value={'Lexmark'}>Lexmark</MenuItem>
+                            <MenuItem value={'Ricoh'}>Ricoh</MenuItem>
+                            <MenuItem value={'Xerox'}>Xerox</MenuItem>
+                            <MenuItem value={'Samsung'}>Samsung</MenuItem>
+                        </Select>
+                    </FormControl>
+                </>
+            )
+
+        if(select === 'status')
+            return(
+                <>
+                    <FormControl fullWidth
+                        disabled={loading}
+                        sx={{
+                            mt:2
+                        }}
+                    >
+                        <InputLabel id="paper-type">trạng thái</InputLabel>
+                        <Select
+                        labelId="paper-type"
+                        id="demo-simple-select"
+                        value={textFieldValue}
+                        label="Thuộc tính"
+                        onChange={(event: SelectChangeEvent) => {
+                            setTextFieldValue(event.target.value as string)
+                        }}
+                        >
+                            <MenuItem value={'active'}>active</MenuItem>
+                            <MenuItem value={'inactive'}>inactive</MenuItem>
+                        </Select>
+                    </FormControl>
+                </>
+            )
+
+        if(select === 'cs')
+            return(
+                <>
+                    <FormControl fullWidth
+                        disabled={loading}
+                        sx={{
+                            mt:2
+                        }}
+                    >
+                        <InputLabel id="paper-type">chọn sơ sở</InputLabel>
+                        <Select
+                        labelId="paper-type"
+                        id="demo-simple-select"
+                        value={textFieldValue}
+                        label="Thuộc tính"
+                        onChange={(event: SelectChangeEvent) => {
+                            setTextFieldValue(event.target.value as string)
+                        }}
+                        >
+                            <MenuItem value={'1'}>1</MenuItem>
+                            <MenuItem value={'2'}>2</MenuItem>
+                        </Select>
+                    </FormControl>
+                </>
+            )
+
+        if(select === 'location')
+            return(
+                <>
+                    <FormControl fullWidth
+                        disabled={loading}
+                        sx={{
+                            mt:2
+                        }}
+                    >
+                        <InputLabel id="paper-type">chọn vị trí</InputLabel>
+                        <Select
+                        labelId="paper-type"
+                        id="demo-simple-select"
+                        value={textFieldValue}
+                        label="Thuộc tính"
+                        onChange={(event: SelectChangeEvent) => {
+                            setTextFieldValue(event.target.value as string)
+                        }}
+                        >
+                            <MenuItem value={'Thư viện'}>Thư viện</MenuItem>
+                            <MenuItem value={'Khu vực hành lang khoa'}>Khu vực hành lang khoa</MenuItem>
+                            <MenuItem value={'Phòng hội trường'}>Phòng hội trường </MenuItem>
+                            <MenuItem value={'Khu vực ký túc xá sinh viên'}>Khu vực ký túc xá sinh viên</MenuItem>
+                            <MenuItem value={'Phòng sinh hoạt chung'}>Phòng sinh hoạt chung</MenuItem>
+                            <MenuItem value={'Quầy dịch vụ sinh viên'}>Quầy dịch vụ sinh viên</MenuItem>
+                            <MenuItem value={'Phòng máy tính công cộng'}>Phòng máy tính công cộng</MenuItem>
+                            <MenuItem value={'Sảnh chính của trường'}>Sảnh chính của trường</MenuItem>
+                            <MenuItem value={'Phòng học nhóm'}>Phòng học nhóm</MenuItem>
+                        </Select>
+                    </FormControl>
+                </>
+            )
+
+        return (
+            <TextField
+                disabled={loading}
+                margin="dense"
+                label="Mô tả"
+                name="description"
+                fullWidth
+                value={textFieldValue}
+                onChange={(event) => setTextFieldValue(event.target.value)}
+            />
+        )
+    }
+
     return (
         <>
             <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
@@ -197,13 +433,7 @@ function EditPrinter({printer_id, setOpen}: any) {
                     }}>
                         {
                             select && 
-                            <TextField sx = {{
-                                mt: 2
-                            }} 
-                                disabled={loading}
-                                value={textFieldValue}
-                                onChange={(event) => setTextFieldValue(event.target.value)}
-                            />
+                            <EditPrinter />
                         }
                         {
                             textFieldValue &&
