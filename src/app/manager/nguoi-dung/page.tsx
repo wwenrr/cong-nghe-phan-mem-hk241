@@ -37,8 +37,6 @@ export default function Page() {
                             //@ts-ignore
                             (account) => ({ ...account, id: account._id }))}
                     columns={columns}
-                    rowsPerPageOptions={[5, 10]}
-                    disableSelectionOnClick
                     sx={{
                         width: "100%",
                         height: "100%",
