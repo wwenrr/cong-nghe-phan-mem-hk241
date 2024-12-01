@@ -406,3 +406,114 @@ export async function get_info(token:string) {
         return data
     }) 
 }
+
+
+//Manager
+const manager_url = 'https://cnpmbe.hcmutssps.id.vn/manager/api'
+
+export async function get_manager_account(token:string, userAgent:string) {
+    return fetch(`${manager_url}/account`, {
+        method: 'GET', 
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+            'user-agent': userAgent,
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {                
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
+    
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        return data
+    }) 
+}
+
+export async function get_printer(token:string) {
+    return fetch(`${manager_url}/printer/all`, {
+        method: 'GET', 
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {                
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
+    
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        return data
+    }) 
+}
+
+export async function delete_printer(token:string, printer_id:string) {
+    return fetch(`${manager_url}/printer/delete/${printer_id}`, {
+        method: 'DELETE', 
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {                
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
+    
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        return data
+    }) 
+}
+
+export async function create_function(token:string, formdata:any) {
+    return fetch(`${manager_url}/printer/create`, {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+        },
+        body: JSON.stringify({
+            "brand": formdata['brand'],
+            "model": formdata['model'],
+            "description": formdata['description'],
+            "location": formdata['location'],
+            "status": formdata['status'],
+            "type": formdata['type'],
+            "deleted": formdata['deleted'],
+            "cs": formdata['cs']
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {                
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
+    
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        return data
+    }) 
+}
