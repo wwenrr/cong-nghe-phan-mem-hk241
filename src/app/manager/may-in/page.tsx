@@ -3,15 +3,16 @@
 import React, { useEffect, useState } from "react";
 import { Path } from "@/assessts/components/path";
 import style from "@styles/may-in.module.scss"
-import { create_function, delete_printer, fetch_printer, get_printer } from "@/assessts/function/fetch";
+import { change_printer_props, create_function, delete_printer, fetch_printer, get_printer } from "@/assessts/function/fetch";
 import Cookies from 'js-cookie';
 import { useRouter } from "next/navigation";
 import { DataGrid } from '@mui/x-data-grid';
-import { Alert, Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Hidden, Snackbar, TextField, Typography } from '@mui/material';
+import { Alert, Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Hidden, InputLabel, MenuItem, Snackbar, TextField, Typography } from '@mui/material';
 import PrintTwoToneIcon from '@mui/icons-material/PrintTwoTone';
 import Link from "next/link";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 function AddPrinter({setOpen}:any) {
     const [openDialog, setOpenDialog] = useState(false);
@@ -146,8 +147,123 @@ function AddPrinter({setOpen}:any) {
   );
 }
 
-function EditPrinter({openDialog, setOpenDialog}:any) {
+function EditPrinter({printer_id, setOpen}: any) {
     const [loading, setLoading] = useState(false)
+    const [openDialog, setOpenDialog] = useState(false);
+    const [select, setSelect] = useState('')
+    const [textFieldValue, setTextFieldValue] = useState('');
+
+    const handleOpenDialog = () => {
+        setOpenDialog(true);
+    }
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+    };
+
+    return (
+        <>
+            <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+                <DialogTitle>Chọn 1 Thuộc Tính Cần Chỉnh Sửa</DialogTitle>
+
+                <DialogContent>
+                <FormControl fullWidth
+                    sx={{
+                        mt:2
+                    }}
+                    disabled={loading}
+                >
+                    <InputLabel id="demo-simple-select-label">Thuộc Tính</InputLabel>
+                    <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={select}
+                    label="Thuộc tính"
+                    onChange={(event: SelectChangeEvent) => {
+                        setSelect(event.target.value as string)
+                    }}
+                    >
+                        <MenuItem value={'brand'}>Thương Hiệu</MenuItem>
+                        <MenuItem value={"description"}>Mô Tả</MenuItem>
+                        <MenuItem value={"location"}>Vị Trí</MenuItem>
+                        <MenuItem value={"status"}>Trạng Thái</MenuItem>
+                        <MenuItem value={"type"}>Loại giấy</MenuItem>
+                        <MenuItem value={"cs"}>Cơ Sở</MenuItem>
+                    </Select>
+                </FormControl>
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column'
+                    }}>
+                        {
+                            select && 
+                            <TextField sx = {{
+                                mt: 2
+                            }} 
+                                disabled={loading}
+                                value={textFieldValue}
+                                onChange={(event) => setTextFieldValue(event.target.value)}
+                            />
+                        }
+                        {
+                            textFieldValue &&
+                            <Button variant="contained"
+                                sx = {{
+                                    mt: 2
+                                }}
+                                disabled={loading}
+                                onClick={async () => {
+                                    setLoading(true)
+                                    try {
+                                        const token = Cookies.get('token')
+                                        let res
+
+                                        if(token)
+                                            res = await change_printer_props(token, 
+                                                {
+                                                    'label': select,
+                                                    'data': textFieldValue
+                                                },
+                                                printer_id
+                                            )
+                                        else throw new Error("Không tìm thấy token")
+
+                                        console.log(res);
+                                        setOpen("Cập Nhật Máy In Thành Công")
+                                    } catch(e) {
+                                        setOpen("Cập Nhật Máy In Thất Bại")
+                                    }
+                                    setLoading(false)
+                                }}
+                            >Xác nhận chỉnh sửa</Button>
+                        }
+                    </div>
+                </DialogContent>
+
+                <DialogActions>
+                    <Button onClick={() => setOpenDialog(false)} color="secondary">
+                        Đóng
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            <button 
+                style= {{ 
+                    backgroundColor: 'blue', 
+                    color: 'white', 
+                    border: 'none', 
+                    padding: '5px 20px', 
+                    borderRadius: '5px', 
+                    cursor: 'pointer',
+                    marginLeft: '5px'
+                }}
+                onClick={() => {
+                    handleOpenDialog()
+                }}
+                >
+                    <EditIcon />
+            </button>
+        </>
+    )
 }
 
 export default function () {
@@ -182,11 +298,18 @@ export default function () {
                             border: 'none', 
                             padding: '5px 20px', 
                             borderRadius: '5px', 
-                            cursor: 'pointer'}
+                            cursor: 'pointer',
+                        }
                         }
                         onClick={async () => {
                             try {
                                 const token = Cookies.get('token')
+
+                                const isConfirmed = window.confirm("Xác nhận xóa máy in?");
+                                if (!isConfirmed) {
+                                    setOpen("Hủy thao tác xóa");
+                                    return; // Dừng nếu người dùng không xác nhận
+                                }
 
                                 //@ts-ignore
                                 const res = await delete_printer(token, params.row._id)
@@ -202,20 +325,7 @@ export default function () {
                         <DeleteIcon />
                     </button>
 
-                    <button 
-                        style= {{ 
-                            backgroundColor: 'blue', 
-                            color: 'white', 
-                            border: 'none', 
-                            padding: '5px 20px', 
-                            borderRadius: '5px', 
-                            cursor: 'pointer',
-                            marginLeft: '5px'
-                        }}
-                        // onClick={() => handleOpenDialog(params.row._id)}
-                        >
-                            <EditIcon />
-                    </button>
+                    <EditPrinter printer_id={params.row._id} setOpen={setOpen}/>
                 </>
             )
           },

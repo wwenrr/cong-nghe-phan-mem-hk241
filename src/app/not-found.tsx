@@ -16,24 +16,32 @@ export default async function NotFoundPage() {
    if(!headersList.get('user-agent'))
       throw new Error("Không có user-agent")
 
+   let auth:string = 'none'
+
    try {
       //@ts-ignore
       account = await fetch_account(token, headersList.get('user-agent'));      
       
       if(account['account']['role'] === 'student') {
-         redirect('/student');
+         auth = 'student'
       }
-
    } catch(err) {
+      console.log(err);
+   }   
+
+   try {
       //@ts-ignore
       account = await get_manager_account(token, headersList.get('user-agent'));
 
       if(account['account']['role'] === 'manager') {
-         redirect('/manager');
+         auth = 'manager'
       }
-
-      //@ts-ignore
-      console.log("err: ", err.message);
-      redirect('/login');
+   } catch(err) {
+      console.log(err);
    }   
+
+   if(auth !== 'none')
+      redirect(`/${auth}`)
+
+   redirect(`/login`)
 };

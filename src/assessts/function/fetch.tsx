@@ -431,7 +431,6 @@ export async function get_manager_account(token:string, userAgent:string) {
         return response.json();
     })
     .then(data => {
-        console.log(data);
         return data
     }) 
 }
@@ -500,6 +499,33 @@ export async function create_function(token:string, formdata:any) {
             "type": formdata['type'],
             "deleted": formdata['deleted'],
             "cs": formdata['cs']
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {                
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
+    
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        return data
+    }) 
+}
+
+export async function change_printer_props(token:string, formdata:any, id:string) {
+    return fetch(`${manager_url}/printer/changeAll/${id}`, {
+        method: 'PATCH', 
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+        },
+        body: JSON.stringify({
+            [formdata['label']]: formdata['data']
         })
     })
     .then(response => {
