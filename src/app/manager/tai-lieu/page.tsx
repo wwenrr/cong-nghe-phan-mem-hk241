@@ -117,42 +117,42 @@ export default function Page() {
         { field: "pages", headerName: "Số Trang", width: 90, sortable: true },
         { field: "name", headerName: "Tên File", width: 350, sortable: false },
         { field: "createdAt", headerName: "Ngày Upload", width: 200, sortable: false },
-        {
-            field: "__v",
-            headerName: "",
-            width: 110,
-            sortable: false,
-            //@ts-ignore
-            renderCell: (params) => {
-                return (
-                    <>
-                        <Button
-                            variant="text"
-                            color="error"
-                            onClick={async () => {
-                                try {
-                                    const token = Cookies.get('token')
+        // {
+        //     field: "__v",
+        //     headerName: "",
+        //     width: 110,
+        //     sortable: false,
+        //     //@ts-ignore
+        //     renderCell: (params) => {
+        //         return (
+        //             <>
+        //                 <Button
+        //                     variant="text"
+        //                     color="error"
+        //                     onClick={async () => {
+        //                         try {
+        //                             const token = Cookies.get('token')
                                     
-                                    //@ts-ignore
-                                    const del = await delete_file(token, params.row._id)
-                                    getFile()
+        //                             //@ts-ignore
+        //                             const del = await delete_file(token, params.row._id)
+        //                             getFile()
 
-                                    console.log(del);
+        //                             console.log(del);
                                     
-                                    setOpen('Xóa file thành công')
-                                } catch(e) {
-                                    //@ts-ignore
-                                    setOpen(e.message)
-                                }
-                            }}
-                            sx={{ fontSize: '1.1rem', width: 5}}
-                        >
-                            <CloseIcon />
-                        </Button>
-                    </>
-                )
-            }
-        }
+        //                             setOpen('Xóa file thành công')
+        //                         } catch(e) {
+        //                             //@ts-ignore
+        //                             setOpen(e.message)
+        //                         }
+        //                     }}
+        //                     sx={{ fontSize: '1.1rem', width: 5}}
+        //                 >
+        //                     <CloseIcon />
+        //                 </Button>
+        //             </>
+        //         )
+        //     }
+        // }
     ];
 
     async function getFile() {

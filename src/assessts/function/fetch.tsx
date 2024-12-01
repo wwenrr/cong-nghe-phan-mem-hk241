@@ -567,3 +567,27 @@ export async function get_all_printer(token:string) {
         return data
     }) 
 }
+
+export function get_all_account(token:string) {
+    return fetch(`${manager_url}/accountAll`, {
+        method: 'GET', 
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {                
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
+    
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        return data
+    }) 
+}

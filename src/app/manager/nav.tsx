@@ -23,11 +23,11 @@ const menu = [
         describe: "Tài Liệu",
         url: "/manager/tai-lieu"
     },
-    // {
-    //     logo: "https://cdn-icons-png.flaticon.com/128/1177/1177568.png",
-    //     describe: "Người Dùng",
-    //     url: "/manager/nguoi-dung"
-    // },
+    {
+        logo: "https://cdn-icons-png.flaticon.com/128/1177/1177568.png",
+        describe: "Người Dùng",
+        url: "/manager/nguoi-dung"
+    },
     // {
     //     logo: "https://cdn-icons-png.flaticon.com/128/9195/9195785.png",
     //     describe: "Thông Tin",
