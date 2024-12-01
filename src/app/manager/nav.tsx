@@ -8,21 +8,21 @@ import useSound from "use-sound";
 import Cookies from 'js-cookie';
 
 const menu = [
-    // {
-    //     logo: "https://cdn-icons-png.flaticon.com/128/1946/1946436.png",
-    //     describe: "Trang Chủ",
-    //     url: "/manager"
-    // },
+    {
+        logo: "https://cdn-icons-png.flaticon.com/128/1946/1946436.png",
+        describe: "Quản Lí",
+        url: "/manager"
+    },
     {
         logo: "https://cdn-icons-png.flaticon.com/128/3233/3233468.png",
         describe: "Máy In",
         url: "/manager/may-in"
     },
-    // {
-    //     logo: "https://cdn-icons-png.flaticon.com/128/9746/9746243.png",
-    //     describe: "Tài Liệu",
-    //     url: "/manager/tai-lieu"
-    // },
+    {
+        logo: "https://cdn-icons-png.flaticon.com/128/9746/9746243.png",
+        describe: "Tài Liệu",
+        url: "/manager/tai-lieu"
+    },
     // {
     //     logo: "https://cdn-icons-png.flaticon.com/128/1177/1177568.png",
     //     describe: "Người Dùng",
@@ -42,6 +42,8 @@ export default function Nav() {
 
     const isInclude = (e: string):boolean => {
         const lastSegment = path.split('/').pop();
+
+        console.log(lastSegment);
 
         if(e == '/manager' && lastSegment=='manager') return true;
         else if(e == '/manager')         return false

@@ -20,6 +20,7 @@ const maping:Record<string, string> & { default: string } = {
     "may-in": "Máy In",
     "nguoi-dung": "Người Dùng",
     "tai-lieu": "Tài Liệu",
+    "manager": "Quản Lí",
 
     default: "not found!"
 }

@@ -6,12 +6,7 @@ export default async function NotFoundPage() {
    let account = null
    const headersList = headers();
    const cookieStore = cookies();
-   const accessToken = cookieStore.get("token");
-
-   if(!accessToken)
-      throw new Error("Không có token")
-
-   const token: string = accessToken.value; 
+   const accessToken = cookieStore.get("token"); 
    
    if(!headersList.get('user-agent'))
       throw new Error("Không có user-agent")
@@ -19,6 +14,10 @@ export default async function NotFoundPage() {
    let auth:string = 'none'
 
    try {
+      if(!accessToken)
+         throw new Error("Không có token")
+   
+      const token: string = accessToken.value;
       //@ts-ignore
       account = await fetch_account(token, headersList.get('user-agent'));      
       
@@ -30,6 +29,10 @@ export default async function NotFoundPage() {
    }   
 
    try {
+      if(!accessToken)
+         throw new Error("Không có token")
+   
+      const token: string = accessToken.value;
       //@ts-ignore
       account = await get_manager_account(token, headersList.get('user-agent'));
 

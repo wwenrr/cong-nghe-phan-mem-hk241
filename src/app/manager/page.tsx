@@ -6,17 +6,6 @@ import { tuble, props, Path} from "@/assessts/components/path";
 import Cookies from 'js-cookie';
 import {useRouter} from "next/navigation";
 
-const arr: Array<tuble> = [
-  {
-    name: "Trang Chủ",
-    url: "/"
-  },
-  {
-    name: "Thông Tin",
-    url: "/thong-tin"
-  }
-];
-
 export default function Home() {
 
   return (

@@ -543,3 +543,27 @@ export async function change_printer_props(token:string, formdata:any, id:string
         return data
     }) 
 }
+
+export async function get_all_printer(token:string) {
+    return fetch(`${manager_url}/file`, {
+        method: 'GET', 
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorData => {                
+                //@ts-ignore
+                throw new Error(errorData.message || 'Có lỗi xảy ra');
+            });
+        }
+    
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        return data
+    }) 
+}

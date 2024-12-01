@@ -230,6 +230,8 @@ function EditPrinter({printer_id, setOpen}: any) {
 
                                         console.log(res);
                                         setOpen("Cập Nhật Máy In Thành Công")
+
+                                        handleCloseDialog()
                                     } catch(e) {
                                         setOpen("Cập Nhật Máy In Thất Bại")
                                     }
