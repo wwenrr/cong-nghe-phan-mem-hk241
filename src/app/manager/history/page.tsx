@@ -32,7 +32,6 @@ export default function Page() {
         { field: "createdAt", headerName: "Created At", flex: 1, sortable: false },
         { field: "cs", headerName: "CS", flex: 1, sortable: false },
         { field: "expireAt", headerName: "Expire At", flex: 1, sortable: false },
-        { field: "linkPath", headerName: "Link Path", flex: 1, sortable: false },
         { field: "location", headerName: "Location", flex: 1, sortable: false },
         { field: "pages", headerName: "Pages", flex: 1, sortable: false },
         { field: "printerId", headerName: "Printer ID", flex: 1, sortable: false },
