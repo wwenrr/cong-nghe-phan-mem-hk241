@@ -36,7 +36,9 @@ export default function Page() {
             setLoading(true)
             const res = await fetch_login(formData)
 
-            Cookies.set('token', res['token'], { expires: 1 });
+            Cookies.set('token', res['token'],   { expires: 1 });
+            Cookies.set('rftoken', res['rftoken'], { expires: 1 });
+
             window.location.href = '/';
         } catch(error) {
             // @ts-ignore
