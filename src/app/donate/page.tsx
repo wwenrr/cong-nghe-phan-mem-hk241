@@ -34,7 +34,7 @@ export default function Foo() {
 
             await sleep(1000);
 
-            redirect("/")
+            window.location.href = '/';
         }
 
         foo()
