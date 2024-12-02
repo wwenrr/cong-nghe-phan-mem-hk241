@@ -21,6 +21,7 @@ const maping:Record<string, string> & { default: string } = {
     "nguoi-dung": "Người Dùng",
     "tai-lieu": "Tài Liệu",
     "manager": "Quản Lí",
+    "history": "Lịch Sử",
 
     default: "not found!"
 }

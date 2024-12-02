@@ -28,11 +28,11 @@ const menu = [
         describe: "Người Dùng",
         url: "/manager/nguoi-dung"
     },
-    // {
-    //     logo: "https://cdn-icons-png.flaticon.com/128/9195/9195785.png",
-    //     describe: "Thông Tin",
-    //     url: "/manager/thong-tin"
-    // },
+    {
+        logo: "https://cdn-icons-png.flaticon.com/128/9195/9195785.png",
+        describe: "Lịch Sử",
+        url: "/manager/history"
+    },
 ]
 
 // ???
