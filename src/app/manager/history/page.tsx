@@ -27,18 +27,18 @@ export default function Page() {
     }, [])
 
     const columns = [
-        { field: "accountId", headerName: "Account ID", flex: 1 },
-        { field: "balancePaperNew", headerName: "Balance Paper", flex: 1 },
-        { field: "createdAt", headerName: "Created At", flex: 1 },
-        { field: "cs", headerName: "CS", flex: 1 },
-        { field: "expireAt", headerName: "Expire At", flex: 1 },
-        { field: "linkPath", headerName: "Link Path", flex: 1 },
-        { field: "location", headerName: "Location", flex: 1 },
-        { field: "pages", headerName: "Pages", flex: 1 },
-        { field: "printerId", headerName: "Printer ID", flex: 1 },
-        { field: "status", headerName: "Status", flex: 1 },
-        { field: "totle", headerName: "Total", flex: 1 },
-        { field: "updatedAt", headerName: "Updated At", flex: 1 },
+        { field: "accountId", headerName: "Account ID", flex: 1, sortable: false },
+        { field: "balancePaperNew", headerName: "Balance Paper", flex: 1, sortable: false },
+        { field: "createdAt", headerName: "Created At", flex: 1, sortable: false },
+        { field: "cs", headerName: "CS", flex: 1, sortable: false },
+        { field: "expireAt", headerName: "Expire At", flex: 1, sortable: false },
+        { field: "linkPath", headerName: "Link Path", flex: 1, sortable: false },
+        { field: "location", headerName: "Location", flex: 1, sortable: false },
+        { field: "pages", headerName: "Pages", flex: 1, sortable: false },
+        { field: "printerId", headerName: "Printer ID", flex: 1, sortable: false },
+        { field: "status", headerName: "Status", flex: 1, sortable: false },
+        { field: "totle", headerName: "Total", flex: 1, sortable: false },
+        { field: "updatedAt", headerName: "Updated At", flex: 1, sortable: false },
     ];
 
     if(data)

@@ -21,10 +21,10 @@ export default function Page() {
     }, [])
 
     const columns = [
-        { field: "name", headerName: "Name", flex: 1 },
-        { field: "email", headerName: "Email", flex: 1 },
-        { field: "phone", headerName: "Phone", flex: 1 },
-        { field: "role", headerName: "Role", flex: 1 },
+        { field: "name", headerName: "Name", flex: 1, sortable: false },
+        { field: "email", headerName: "Email", flex: 1, sortable: false },
+        { field: "phone", headerName: "Phone", flex: 1, sortable: false },
+        { field: "role", headerName: "Role", flex: 1, sortable: false },
     ];
 
     if(data)
