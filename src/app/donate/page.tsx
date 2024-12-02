@@ -33,6 +33,8 @@ export default function Foo() {
             setLoading(false)
 
             await sleep(3000);
+
+            redirect("/")
         }
 
         foo()
