@@ -32,7 +32,7 @@ export default function Foo() {
 
             setLoading(false)
 
-            await sleep(3000);
+            await sleep(1000);
 
             redirect("/")
         }
